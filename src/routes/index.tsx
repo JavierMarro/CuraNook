@@ -1,39 +1,51 @@
-import { createFileRoute } from '@tanstack/react-router'
-import logo from '../logo.svg'
+import { createFileRoute } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
+import { motion } from "motion/react";
+import { LampContainer } from "@/ui/lamp";
+import { TypewriterEffectSmooth } from "@/ui/typewriter-effect";
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute("/")({
   component: App,
-})
+});
 
 function App() {
+  const words = [
+    {
+      text: "Welcome",
+      className: "text-black dark:text-black",
+    },
+    {
+      text: "to",
+      className: "text-black dark:text-black",
+    },
+    {
+      text: "CuraNook.",
+      className: "text-cyan-900 dark:text-cyan-900",
+    },
+  ];
+
   return (
-    <div className="text-center">
-      <header className="min-h-screen flex flex-col items-center justify-center bg-[#282c34] text-white text-[calc(10px+2vmin)]">
-        <img
-          src={logo}
-          className="h-[40vmin] pointer-events-none animate-[spin_20s_linear_infinite]"
-          alt="logo"
-        />
-        <p>
-          Edit <code>src/routes/index.tsx</code> and save to reload.
-        </p>
-        <a
-          className="text-[#61dafb] hover:underline"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <>
+      <LampContainer>
+        <TypewriterEffectSmooth words={words} />
+        <motion.h1
+          initial={{ opacity: 0.5, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.3,
+            duration: 0.8,
+            ease: "easeInOut",
+          }}
+          className="mt-8 bg-gradient-to-br from-slate-500 to-black py-4 bg-clip-text text-center text-xl font-medium tracking-tight text-transparent  md:text-2xl"
         >
-          Learn React
-        </a>
-        <a
-          className="text-[#61dafb] hover:underline"
-          href="https://tanstack.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn TanStack
-        </a>
-      </header>
-    </div>
-  )
+          CuraNook is a platform where users can explore virtual exhibitions
+          from combined
+          <br /> collections of antiquities and fine art from The Metropolitan
+          Museum and Harvard Art Museums. <br /> Whether you are a researcher,
+          student, or art enthusiast, click down below <br />
+          and start creating your own exhibitions.
+        </motion.h1>
+      </LampContainer>
+    </>
+  );
 }
