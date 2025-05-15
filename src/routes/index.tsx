@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { LampContainer } from "@/ui/lamp";
 import { TypewriterEffectSmooth } from "@/ui/typewriter-effect";
@@ -22,6 +23,7 @@ function App() {
       className: "text-cyan-900 dark:text-cyan-900",
     },
   ];
+
   return (
     <>
       <LampContainer>
@@ -43,7 +45,6 @@ function App() {
           student, or art enthusiast, click down below <br />
           and start creating your own exhibitions.
         </motion.h1>
-        <button type="button">Browse Artwork here</button>
       </LampContainer>
     </>
   );

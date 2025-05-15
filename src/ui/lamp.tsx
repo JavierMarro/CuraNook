@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
@@ -89,8 +90,13 @@ export const LampContainer = ({
 
         <div className="absolute inset-auto z-40 h-60 w-full -translate-y-[19.5rem] bg-slate-100 "></div>
       </div>
-
-      <div className="relative z-50 flex -translate-y-[23rem] flex-col items-center px-5">
+      <Link
+        to="/browse"
+        className="relative px-6 py-3 bg-cyan-900 text-white rounded-lg shadow-lg hover:bg-cyan-800 transition mt-6 inline-block group"
+      >
+        Browse Artwork here
+      </Link>
+      <div className="relative z-50 flex -translate-y-[26rem] flex-col items-center px-5">
         {children}
       </div>
     </div>
