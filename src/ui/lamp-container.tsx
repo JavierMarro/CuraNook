@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
@@ -68,14 +67,14 @@ export const LampContainer = ({
         <div className="absolute top-1/2 z-50 h-48 w-full bg-transparent opacity-10 backdrop-blur-md"></div>
         <div className="absolute inset-auto z-50 h-36 w-[38rem] -translate-y-32 rounded-full bg-cyan-500 opacity-70 blur-3xl"></div>
         <motion.div
-          initial={{ width: "8rem" }}
-          whileInView={{ width: "16rem" }}
+          initial={{ width: "16rem" }}
+          whileInView={{ width: "30rem" }}
           transition={{
             delay: 0.3,
             duration: 0.8,
             ease: "easeInOut",
           }}
-          className="absolute inset-auto z-30 h-36 w-64 -translate-y-[7rem] rounded-full bg-cyan-400 blur-2xl"
+          className="absolute inset-auto z-30 h-36 w-64 -translate-y-9 sm:-translate-y-[0rem] md:-translate-y-[0rem] lg:-translate-y-[0rem] xl:-translate-y-[0rem] rounded-full bg-cyan-100 blur-2xl"
         ></motion.div>
         <motion.div
           initial={{ width: "15rem" }}
@@ -85,18 +84,18 @@ export const LampContainer = ({
             duration: 0.8,
             ease: "easeInOut",
           }}
-          className="absolute inset-auto z-50 h-0.5 w-[30rem] -translate-y-[12rem] bg-cyan-500 "
+          className="
+    absolute inset-auto z-50 h-0.5
+    w-3/4 sm:w-[24rem] md:w-[30rem]
+    -translate-y-50 md:-translate-y-[5rem] lg:-translate-y-[5rem] xl:-translate-y-[10rem]
+    bg-cyan-500
+  "
         ></motion.div>
 
         <div className="absolute inset-auto z-40 h-60 w-full -translate-y-[19.5rem] bg-slate-100 "></div>
       </div>
-      <Link
-        to="/browse"
-        className="relative px-6 py-3 bg-cyan-900 text-white rounded-lg shadow-lg hover:bg-cyan-800 transition mt-6 inline-block group"
-      >
-        Browse Artwork here
-      </Link>
-      <div className="relative z-50 flex -translate-y-[26rem] flex-col items-center px-5">
+
+      <div className="relative z-50 flex flex-col items-center px-2 sm:px-5 -translate-y-80 sm:-translate-y-6 md:-translate-y-18 lg:-translate-y-30 xl:-translate-y-50">
         {children}
       </div>
     </div>
