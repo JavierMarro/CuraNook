@@ -1,5 +1,6 @@
 import { NavMenu } from "@/components/NavMenu";
 import { createFileRoute } from "@tanstack/react-router";
+import { Suspense } from "react";
 
 export const Route = createFileRoute("/browse")({
   component: Browse,
@@ -10,6 +11,16 @@ function Browse() {
     <>
       <div className="relative w-full flex items-center justify-center">
         <NavMenu className="top-2" />
+        {/*TODO: Add fetching data*/}
+        <Suspense
+          fallback={
+            <div className="w-full h-full flex items-center justify-center">
+              Loading...
+            </div>
+          }
+        >
+          {/* <ArtworkGrid /> */}
+        </Suspense>
       </div>
     </>
   );

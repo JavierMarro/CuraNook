@@ -65,20 +65,20 @@ export const LampContainer = ({
         </motion.div>
         <div className="absolute top-1/2 h-48 w-full translate-y-12 scale-x-150 bg-slate-100 blur-2xl"></div>
         <div className="absolute top-1/2 z-50 h-48 w-full bg-transparent opacity-10 backdrop-blur-md"></div>
-        <div className="absolute inset-auto z-50 h-36 w-[38rem] -translate-y-32 rounded-full bg-cyan-500 opacity-70 blur-3xl"></div>
+        <div className="absolute inset-auto z-50 h-36 w-[38rem] -translate-y-20 sm:-translate-y-[0rem] md:-translate-y-[0rem] lg:-translate-y-[0rem] xl:-translate-y-[2rem] rounded-full bg-cyan-500 opacity-70 blur-3xl"></div>
         <motion.div
-          initial={{ width: "16rem" }}
-          whileInView={{ width: "30rem" }}
+          initial={{ width: "14rem" }}
+          whileInView={{ width: "26rem" }}
           transition={{
             delay: 0.3,
             duration: 0.8,
             ease: "easeInOut",
           }}
-          className="absolute inset-auto z-30 h-36 w-64 -translate-y-9 sm:-translate-y-[0rem] md:-translate-y-[0rem] lg:-translate-y-[0rem] xl:-translate-y-[0rem] rounded-full bg-cyan-100 blur-2xl"
+          className="absolute inset-auto z-30 h-36 w-64 -translate-y-9 sm:-translate-y-[0rem] md:-translate-y-[0rem] lg:-translate-y-[0rem] xl:-translate-y-[3rem] rounded-full bg-cyan-100 blur-2xl"
         ></motion.div>
         <motion.div
-          initial={{ width: "15rem" }}
-          whileInView={{ width: "30rem" }}
+          initial={{ width: "8rem" }}
+          whileInView={{ width: "24rem" }}
           transition={{
             delay: 0.3,
             duration: 0.8,
@@ -87,7 +87,7 @@ export const LampContainer = ({
           className="
     absolute inset-auto z-50 h-0.5
     w-3/4 sm:w-[24rem] md:w-[30rem]
-    -translate-y-50 md:-translate-y-[5rem] lg:-translate-y-[5rem] xl:-translate-y-[10rem]
+    -translate-y-45 sm:-translate-y-[2rem] md:-translate-y-[2rem] lg:-translate-y-[4rem] xl:-translate-y-[10rem]
     bg-cyan-500
   "
         ></motion.div>
