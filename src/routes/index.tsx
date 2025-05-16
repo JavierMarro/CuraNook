@@ -46,6 +46,7 @@ function App() {
           </motion.h1>
           <Link
             to="/browse"
+            preload="intent"
             className="relative px-6 py-3 bg-cyan-900 text-white rounded-lg shadow-lg hover:bg-cyan-800 transition mt-6 inline-block group"
           >
             Browse Artwork here
