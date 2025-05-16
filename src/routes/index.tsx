@@ -10,11 +10,11 @@ export const Route = createFileRoute("/")({
 function App() {
   const words = [
     {
-      text: "Welcome ",
+      text: "Welcome",
       className: "text-black dark:text-black ",
     },
     {
-      text: "to ",
+      text: "to",
       className: "text-black dark:text-black ",
     },
     {
@@ -36,7 +36,7 @@ function App() {
               duration: 0.8,
               ease: "easeInOut",
             }}
-            className="mt-4 md:mt-8 max-w-2xl px-2 md:px-0 bg-gradient-to-br from-slate-500 to-black py-2 md:py-4 bg-clip-text text-center text-base sm:text-lg md:text-2xl font-medium tracking-tight text-transparent"
+            className="mt-4 md:mt-8 max-w-2xl px-5 md:px-0 bg-gradient-to-br from-slate-500 to-black py-2 md:py-4 bg-clip-text text-center text-base sm:text-lg md:text-2xl font-medium tracking-tight text-transparent"
           >
             CuraNook is a platform where you can explore combined collections of
             antiquities and fine art from The Metropolitan Museum and Harvard
