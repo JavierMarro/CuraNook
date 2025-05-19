@@ -18,6 +18,7 @@ export const MenuItem = ({
   item,
   to,
   children,
+  activeProps,
 }: {
   setActive: (item: string) => void;
   active: string | null;
@@ -25,14 +26,22 @@ export const MenuItem = ({
   to?: string;
   href?: string;
   children?: React.ReactNode;
+  activeProps?: React.HTMLAttributes<HTMLElement>;
 }) => {
+  const isActive = active === item;
   return (
     <div onMouseEnter={() => setActive(item)} className="relative ">
       <motion.p
         transition={{ duration: 0.3 }}
-        className="cursor-pointer text-black font-bold hover:opacity-[0.9] dark:text-white"
+        className="cursor-pointer text-black text-lg md:text-xl xl:text-3xl hover:opacity-[0.9] dark:text-white"
       >
-        {to ? <Link to={to}>{item}</Link> : item}
+        {to ? (
+          <Link to={to} {...(isActive ? activeProps : {})}>
+            {item}
+          </Link>
+        ) : (
+          item
+        )}
       </motion.p>
       {active !== null && (
         <motion.div
@@ -72,7 +81,7 @@ export const Menu = ({
   return (
     <nav
       onMouseLeave={() => setActive(null)} // resets the state
-      className="relative rounded-full border border-transparent dark:bg-cyan-900 dark:border-white/[0.2] bg-cyan-900 shadow-input flex justify-center space-x-11 px-8 py-6 "
+      className="relative rounded-full border border-transparent dark:bg-cyan-900 dark:border-white/[0.2] bg-cyan-900 shadow-input flex justify-center space-x-10 md:space-x-15 xl:space-x-15 px-8 py-6 "
     >
       {children}
     </nav>

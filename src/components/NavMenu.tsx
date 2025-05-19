@@ -13,18 +13,21 @@ export function NavMenu({ className }: { className?: string }) {
         <MenuItem
           setActive={setActive}
           active={active}
+          activeProps={{ className: "font-bold" }}
           item="CuraNook"
           to="/"
         ></MenuItem>
         <MenuItem
           setActive={setActive}
           active={active}
+          activeProps={{ className: "font-bold" }}
           item="Your Collections"
           to="/collections"
         ></MenuItem>
         <MenuItem
           setActive={setActive}
           active={active}
+          activeProps={{ className: "font-bold" }}
           item="Log in"
           to="/login"
         ></MenuItem>
