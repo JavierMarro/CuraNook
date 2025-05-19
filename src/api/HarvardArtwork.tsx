@@ -1,0 +1,1 @@
+const HARVARD_KEY = import.meta.env.VITE_HARVARD_MUSEUMS_API_KEY;

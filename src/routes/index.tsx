@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { LampContainer } from "@/ui/lamp-container";
 import { TypewriterEffectSmooth } from "@/ui/typewriter-effect";
-import type { Words } from "@/types/typeWriterEffect";
+import type { Words } from "@/types/TypeWriterEffect";
 
 export const Route = createFileRoute("/")({
   component: App,
