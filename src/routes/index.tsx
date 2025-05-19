@@ -2,13 +2,14 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { LampContainer } from "@/ui/lamp-container";
 import { TypewriterEffectSmooth } from "@/ui/typewriter-effect";
+import type { Words } from "@/types/typeWriterEffect";
 
 export const Route = createFileRoute("/")({
   component: App,
 });
 
 function App() {
-  const words = [
+  const words: Words[] = [
     {
       text: "Welcome",
       className: "text-black dark:text-black ",
