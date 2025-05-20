@@ -1,4 +1,4 @@
-import type { METArtwork } from "@/types/METartworkItem";
+import type { METArtwork } from "@/types/_METartworkItem.unused";
 
 export const fetchMETArtworks = async (): Promise<{ objectIDs: number[] }> => {
   const res = (
