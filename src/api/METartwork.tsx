@@ -1,4 +1,6 @@
-export const fetchArtworks = async () => {
+import type { METArtwork } from "@/types/METartworkItem";
+
+export const fetchMETArtworks = async (): Promise<{ objectIDs: number[] }> => {
   const res = (
     await fetch(
       `https://collectionapi.metmuseum.org/public/collection/v1/objects`
@@ -8,7 +10,9 @@ export const fetchArtworks = async () => {
   return res;
 };
 
-export const fetchArtwork = async (objectID: number) => {
+export const fetchMETArtwork = async (
+  objectID: number
+): Promise<METArtwork> => {
   const res = (
     await fetch(
       `https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`
@@ -18,6 +22,7 @@ export const fetchArtwork = async (objectID: number) => {
   return res;
 };
 
+// FROM TANSTACK DOCS
 // import { useQuery } from "@tanstack/react-query";
 
 // function METData() {
