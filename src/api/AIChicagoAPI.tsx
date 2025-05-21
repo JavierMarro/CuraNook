@@ -3,7 +3,9 @@ import type {
   AIChicagoApiResponse,
 } from "@/types/AIChicagoItem";
 
-// Defining fields to fetch as per API docs best practice
+// Defining fields to fetch as per API docs best practice (limits the amount of data returned)
+// https://api.artic.edu/docs/#fields
+// https://api.artic.edu/docs/#best-practices
 const AIChicagoFields = [
   "id",
   "image_id",
@@ -28,7 +30,7 @@ export const fetchAIChicagoArtworks = async (
 ): Promise<{
   artworks: AIChicagoArtwork[];
   iiif_url: string;
-  pagination: AIChicagoApiResponse<AIChicagoArtwork>["pagination"];
+  pagination: AIChicagoApiResponse<AIChicagoArtwork>["pagination"]; // I needed help from AI to set up this Promise
 }> => {
   const baseUrl = `https://api.artic.edu/api/v1/artworks?page=${page}&limit=${limit}&fields=${AIChicagoFields}`;
   const response = await fetch(baseUrl);
@@ -42,7 +44,7 @@ export const fetchAIChicagoArtworks = async (
   const data: AIChicagoApiResponse<AIChicagoArtwork> = await response.json();
 
   return {
-    artworks: data.data, // This data does not have imageURL, it'll be added in component
+    artworks: data.data, // This data does not have imageURL, because of the nature of the data structure from this API the imageUrl will be added in component
     iiif_url: data.config.iiif_url,
     pagination: data.pagination,
   };

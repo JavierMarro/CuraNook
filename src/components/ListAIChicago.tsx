@@ -1,0 +1,69 @@
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { fetchAIChicagoArtworks } from "@/api/AIChicagoAPI";
+import { CardAIChicago } from "./CardAIChicago";
+import type {
+  AIChicagoArtwork,
+  AIChicagoApiResponse,
+} from "@/types/AIChicagoItem";
+
+export function ItemsListAIChicago() {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const { data, isLoading, isError } = useQuery<{
+    artworks: AIChicagoArtwork[];
+    iiif_url: string;
+    pagination: AIChicagoApiResponse<AIChicagoArtwork>["pagination"];
+  }>({
+    queryKey: ["AIChicagoArtworksData", currentPage],
+    queryFn: () => fetchAIChicagoArtworks(currentPage, 15),
+    placeholderData: (previousData) => previousData, // Keeps previous data visible while new data loads
+    staleTime: 5 * 60 * 1000, // From tutorial, this avoids fresh requests. It controls how long before it's considered stale. gcTime (garbage collection time) controls how long would be stored in the cache
+    //If my understanding is correct, this is the TanStack alternative to useEffect
+  });
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError || !data) return <div>Error loading artworks.</div>;
+
+  return (
+    <div className="max-w-6xl mx-auto px-4 pt-24">
+      <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">
+        Art Institute of Chicago Collection
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {data.artworks.map((artwork) => (
+          <CardAIChicago
+            key={artwork.id}
+            artwork={{
+              ...artwork, // Self-note: Spread operator makes shallow copy of object and adds imageUrl. This is a workaround to avoid modifying the original object
+              imageUrl: artwork.image_id
+                ? `${data.iiif_url}/${artwork.image_id}/full/843,/0/default.jpg`
+                : undefined,
+            }}
+          />
+        ))}
+      </div>
+      <div className="flex flex-col items-center gap-2 mt-4">
+        <div className="flex justify-center gap-4 p-5">
+          <button
+            onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
+            disabled={currentPage === 1}
+            className="px-4 py-2 bg-cyan-500 rounded disabled:opacity-50"
+          >
+            Previous
+          </button>
+          <span className="text-base text-black mt-2">
+            Page {currentPage} of {data.pagination.total_pages}
+          </span>
+          <button
+            onClick={() => setCurrentPage((page) => page + 1)}
+            disabled={!data.pagination || !data.pagination.next_url}
+            className="px-4 py-2 bg-cyan-500 rounded disabled:opacity-50"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
