@@ -2,19 +2,20 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { LampContainer } from "@/ui/lamp-container";
 import { TypewriterEffectSmooth } from "@/ui/typewriter-effect";
+import type { Words } from "@/types/TypeWriterEffect";
 
 export const Route = createFileRoute("/")({
   component: App,
 });
 
 function App() {
-  const words = [
+  const words: Words[] = [
     {
-      text: "Welcome ",
+      text: "Welcome",
       className: "text-black dark:text-black ",
     },
     {
-      text: "to ",
+      text: "to",
       className: "text-black dark:text-black ",
     },
     {
@@ -36,7 +37,7 @@ function App() {
               duration: 0.8,
               ease: "easeInOut",
             }}
-            className="mt-4 md:mt-8 max-w-2xl px-2 md:px-0 bg-gradient-to-br from-slate-500 to-black py-2 md:py-4 bg-clip-text text-center text-base sm:text-lg md:text-2xl font-medium tracking-tight text-transparent"
+            className="mt-4 md:mt-8 max-w-2xl px-5 md:px-0 bg-gradient-to-br from-slate-500 to-black py-2 md:py-4 bg-clip-text text-center text-base sm:text-lg md:text-2xl font-medium tracking-tight text-transparent"
           >
             CuraNook is a platform where you can explore combined collections of
             antiquities and fine art from The Metropolitan Museum and Harvard
@@ -46,6 +47,7 @@ function App() {
           </motion.h1>
           <Link
             to="/browse"
+            title="Button to browse artwork"
             preload="intent"
             className="relative px-6 py-3 bg-cyan-900 text-white rounded-lg shadow-lg hover:bg-cyan-800 transition mt-6 inline-block group"
           >

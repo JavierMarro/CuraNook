@@ -1,3 +1,4 @@
+import { ItemsListAIChicago } from "@/components/ListAIChicago";
 import { NavMenu } from "@/components/NavMenu";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -10,6 +11,8 @@ function Browse() {
     <>
       <div className="relative w-full flex items-center justify-center">
         <NavMenu className="top-2" />
+        {/*TODO: Add fetching data*/}
+        <ItemsListAIChicago />
       </div>
     </>
   );
