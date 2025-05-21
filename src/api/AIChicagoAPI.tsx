@@ -1,14 +1,49 @@
-import type { AIChicagoArtwork } from "@/types/AIChicagoItem";
+import type {
+  AIChicagoArtwork,
+  AIChicagoApiResponse,
+} from "@/types/AIChicagoItem";
 
-export const fetchAICArtworks = async (
+// Defining fields to fetch as per API docs best practice
+const AIChicagoFields = [
+  "id",
+  "image_id",
+  "title",
+  "date_display",
+  "artist_title",
+  "place_of_origin",
+  "artwork_type_title",
+  "style_title",
+  "classification_title",
+  "medium_display",
+  "dimensions",
+  "description",
+  "department_title",
+  "is_public_domain",
+  "credit_line",
+].join(",");
+
+export const fetchAIChicagoArtworks = async (
   page = 1,
   limit = 15
-): Promise<AIChicagoArtwork[]> => {
-  const res = (
-    await fetch(
-      `https://api.artic.edu/api/v1/artworks?page=${page}&limit=${limit}`
-    )
-  ).json();
-  if (!res) throw new Error("Failed to fetch artworks");
-  return res;
+): Promise<{
+  artworks: AIChicagoArtwork[];
+  iiif_url: string;
+  pagination: AIChicagoApiResponse<AIChicagoArtwork>["pagination"];
+}> => {
+  const baseUrl = `https://api.artic.edu/api/v1/artworks?page=${page}&limit=${limit}&fields=${AIChicagoFields}`;
+  const response = await fetch(baseUrl);
+
+  if (!response.ok) {
+    throw new Error(
+      `Failed to fetch artworks: ${response.status} ${response.statusText}`
+    );
+  }
+  // Check if the response is valid and parse it
+  const data: AIChicagoApiResponse<AIChicagoArtwork> = await response.json();
+
+  return {
+    artworks: data.data, // This data does not have imageURL, it'll be added in component
+    iiif_url: data.config.iiif_url,
+    pagination: data.pagination,
+  };
 };

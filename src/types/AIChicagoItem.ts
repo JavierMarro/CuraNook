@@ -17,6 +17,7 @@ export interface AIChicagoApiResponse<T> {
 export interface AIChicagoArtwork {
   id: number;
   image_id: string | null;
+  imageUrl?: string;
   title: string;
   date_display: string;
   artist_title: string;
