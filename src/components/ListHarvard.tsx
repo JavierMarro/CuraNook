@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchHarvardArtworks } from "@/api/HarvardMuseumAPI";
+import { CardHarvard } from "./CardHarvard";
+import type { HarvardListSummary } from "@/types/HarvardMuseumsInterfaces";
 
 export function ItemsListHarvard() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,7 +23,9 @@ export function ItemsListHarvard() {
         Harvard Art Museums Collection
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
-        {/*TODO: Placeholder for CardHarvard component */}
+        {data.artworks.map((artwork: HarvardListSummary) => (
+          <CardHarvard key={artwork.objectid} artwork={artwork} />
+        ))}
       </div>
       <div className="flex flex-col items-center gap-2 mt-4">
         <div className="flex justify-center gap-4 p-5">
