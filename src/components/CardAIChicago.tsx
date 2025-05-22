@@ -2,7 +2,7 @@ import type { AIChicagoArtwork } from "@/types/AIChicagoItem";
 
 interface ArtworkCardProps {
   artwork: AIChicagoArtwork & { imageUrl?: string };
-} // Self-note: This is a workaround to avoid modifying the original object
+} // Self-note: Getting imageUrl as a workaround to avoid modifying the original object
 
 export function CardAIChicago({ artwork }: ArtworkCardProps) {
   return (

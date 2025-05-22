@@ -30,18 +30,18 @@ export const fetchAIChicagoArtworks = async (
 ): Promise<{
   artworks: AIChicagoArtwork[];
   iiif_url: string;
-  pagination: AIChicagoApiResponse<AIChicagoArtwork>["pagination"]; // I needed help from AI to set up this Promise
+  pagination: AIChicagoApiResponse<AIChicagoArtwork>["pagination"];
 }> => {
   const baseUrl = `https://api.artic.edu/api/v1/artworks?page=${page}&limit=${limit}&fields=${AIChicagoFields}`;
-  const response = await fetch(baseUrl);
+  const res = await fetch(baseUrl);
 
-  if (!response.ok) {
+  if (!res.ok) {
     throw new Error(
-      `Failed to fetch artworks: ${response.status} ${response.statusText}`
+      `Failed to fetch artworks: ${res.status} ${res.statusText}`
     );
   }
   // Check if the response is valid and parse it
-  const data: AIChicagoApiResponse<AIChicagoArtwork> = await response.json();
+  const data: AIChicagoApiResponse<AIChicagoArtwork> = await res.json();
 
   return {
     artworks: data.data, // This data does not have imageURL, because of the nature of the data structure from this API the imageUrl will be added in component

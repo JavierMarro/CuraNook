@@ -1,7 +1,19 @@
+export interface HarvardApiResponse<T> {
+  info: {
+    totalrecordsperquery: number;
+    totalrecords: number;
+    pages: number;
+    page: number;
+    next?: string;
+    responsetime: string;
+  };
+  records: T[];
+}
+
 export interface HarvardArtwork {
   objectid: number;
   primaryimageurl: string;
-  images?: { baseimageurl: string }[];
+  // images?: { baseimageurl: string }[];
   title: string;
   artistDisplayName: string;
   dated?: string;

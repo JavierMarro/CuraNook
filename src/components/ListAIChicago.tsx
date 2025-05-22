@@ -18,7 +18,7 @@ export function ItemsListAIChicago() {
     queryKey: ["AIChicagoArtworksData", currentPage],
     queryFn: () => fetchAIChicagoArtworks(currentPage, 15),
     placeholderData: (previousData) => previousData, // Keeps previous data visible while new data loads
-    staleTime: 5 * 60 * 1000, // From tutorial, this avoids fresh requests. It controls how long before it's considered stale. gcTime (garbage collection time) controls how long would be stored in the cache
+    staleTime: 1000 * 60 * 15, // From tutorial (https://www.youtube.com/watch?v=w9r55wd2CAk), this avoids fresh requests (15mins). It controls how long before it's considered stale.
     //If my understanding is correct, this is the TanStack alternative to useEffect
   });
 
