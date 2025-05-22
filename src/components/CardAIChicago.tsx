@@ -1,4 +1,4 @@
-import type { AIChicagoArtwork } from "@/types/AIChicagoItem";
+import type { AIChicagoArtwork } from "@/types/AIChicagoInterfaces";
 
 interface ArtworkCardProps {
   artwork: AIChicagoArtwork & { imageUrl?: string };

@@ -5,12 +5,19 @@ export interface HarvardApiResponse<T> {
     pages: number;
     page: number;
     next?: string;
-    responsetime: string;
   };
   records: T[];
 }
 
-export interface HarvardArtwork {
+export interface HarvardListSummary {
+  objectid: number;
+  primaryimageurl?: string;
+  title?: string;
+  dated?: string;
+  people?: { name?: string; displayname?: string }[];
+}
+
+export interface HarvardCardDetailed {
   objectid: number;
   primaryimageurl: string;
   // images?: { baseimageurl: string }[];

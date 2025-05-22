@@ -5,7 +5,7 @@ import { CardAIChicago } from "./CardAIChicago";
 import type {
   AIChicagoArtwork,
   AIChicagoApiResponse,
-} from "@/types/AIChicagoItem";
+} from "@/types/AIChicagoInterfaces";
 
 export function ItemsListAIChicago() {
   const [currentPage, setCurrentPage] = useState(1);

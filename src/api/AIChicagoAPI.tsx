@@ -1,7 +1,7 @@
 import type {
   AIChicagoArtwork,
   AIChicagoApiResponse,
-} from "@/types/AIChicagoItem";
+} from "@/types/AIChicagoInterfaces";
 
 // Defining fields to fetch as per API docs best practice (limits the amount of data returned)
 // https://api.artic.edu/docs/#fields

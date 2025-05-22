@@ -14,20 +14,29 @@
 // Link to API docs manipulating data: https://api-toolkit.herokuapp.com/6
 
 import type {
-  HarvardArtwork,
   HarvardApiResponse,
-} from "@/types/HarvardArtworkItem";
+  HarvardListSummary,
+  HarvardCardDetailed,
+} from "@/types/HarvardMuseumsInterfaces";
 
 const HARVARD_KEY = import.meta.env.VITE_HARVARD_MUSEUMS_API_KEY;
+
+const HarvardListFields = [
+  "objectid",
+  "primaryimageurl",
+  "title",
+  "dated",
+  "people",
+].join(",");
 
 export const fetchHarvardArtworks = async (
   page = 1,
   size = 15
 ): Promise<{
-  artworks: HarvardArtwork[];
-  info: HarvardApiResponse<HarvardArtwork>["info"];
+  artworks: HarvardListSummary[];
+  info: HarvardApiResponse<HarvardListSummary>["info"];
 }> => {
-  const baseUrl = `https://api.harvardartmuseums.org/object?apikey=${HARVARD_KEY}&size=${size}&page=${page}`;
+  const baseUrl = `https://api.harvardartmuseums.org/object?apikey=${HARVARD_KEY}&size=${size}&page=${page}&fields=${HarvardListFields}`;
   const res = await fetch(baseUrl);
 
   if (!res.ok) {
@@ -36,10 +45,38 @@ export const fetchHarvardArtworks = async (
     );
   }
   // Check if the response is valid and parse it (sames as AIChicago)
-  const data: HarvardApiResponse<HarvardArtwork> = await res.json();
+  const data: HarvardApiResponse<HarvardListSummary> = await res.json();
 
   return {
     artworks: data.records,
     info: data.info,
   };
+};
+
+const HarvardArtworkFields = [
+  "objectid",
+  "primaryimageurl",
+  "title",
+  "dated",
+  "artistDisplayName",
+  "period",
+  "culture",
+  "url",
+  "classification",
+  "medium",
+  "technique",
+  "dimensions",
+  "department",
+  "rightsAndReproduction",
+  "creditLine",
+].join(",");
+
+export const fetchHarvardArtworkById = async (
+  objectId: number
+): Promise<HarvardCardDetailed> => {
+  const res = await fetch(
+    `https://api.harvardartmuseums.org/object/${objectId}?apikey=${HARVARD_KEY}&fields=${HarvardArtworkFields}`
+  );
+  if (!res.ok) throw new Error("Failed to fetch artwork data");
+  return res.json();
 };

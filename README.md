@@ -70,6 +70,7 @@ In the short term, the idea is to integrate even more APIs to grant users a wide
 - Aceternity (https://ui.aceternity.com/components)
 - GitHub (Github (https://github.com/))
 - Medium (https://medium.com/?tag=software-engineering)
+- FreeCodeCamp (https://www.freecodecamp.org/news/)
 
 ## Installation & Setup
 
@@ -86,6 +87,7 @@ TanStack:
 
 TypeScript:
 [Article - Working with TypeScript interfaces](https://www.freecodecamp.org/news/how-typescript-interfaces-work/)
+[Article - TypeScript Generics](https://medium.com/@ignatovich.dm/typescript-generics-a-simple-guide-with-practical-examples-ca3492eb821f)
 
 Harvard Museums API:
 [API Toolkit - Learning the API](https://api-toolkit.herokuapp.com/)
