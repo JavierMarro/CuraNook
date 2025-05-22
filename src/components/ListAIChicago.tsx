@@ -5,7 +5,7 @@ import { CardAIChicago } from "./CardAIChicago";
 import type {
   AIChicagoArtwork,
   AIChicagoApiResponse,
-} from "@/types/AIChicagoItem";
+} from "@/types/AIChicagoInterfaces";
 
 export function ItemsListAIChicago() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,7 +18,7 @@ export function ItemsListAIChicago() {
     queryKey: ["AIChicagoArtworksData", currentPage],
     queryFn: () => fetchAIChicagoArtworks(currentPage, 15),
     placeholderData: (previousData) => previousData, // Keeps previous data visible while new data loads
-    staleTime: 5 * 60 * 1000, // From tutorial, this avoids fresh requests. It controls how long before it's considered stale. gcTime (garbage collection time) controls how long would be stored in the cache
+    staleTime: 1000 * 60 * 15, // From tutorial (https://www.youtube.com/watch?v=w9r55wd2CAk), this avoids fresh requests (15mins). It controls how long before it's considered stale.
     //If my understanding is correct, this is the TanStack alternative to useEffect
   });
 
@@ -26,7 +26,7 @@ export function ItemsListAIChicago() {
   if (isError || !data) return <div>Error loading artworks.</div>;
 
   return (
-    <div className="max-w-6xl mx-auto px-4 pt-24">
+    <div className="max-w-6xl mx-auto px-4 pt-5">
       <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">
         Art Institute of Chicago Collection
       </h2>

@@ -39,10 +39,10 @@ function App() {
             }}
             className="mt-4 md:mt-8 max-w-2xl px-5 md:px-0 bg-gradient-to-br from-slate-500 to-black py-2 md:py-4 bg-clip-text text-center text-base sm:text-lg md:text-2xl font-medium tracking-tight text-transparent"
           >
-            CuraNook is a platform where you can explore combined collections of
-            antiquities and fine art from The Metropolitan Museum and Harvard
-            Art Museums. Whether you are a researcher, student, or art
-            enthusiast, click down below and start creating your own
+            CuraNook is a platform where you can explore collections of
+            antiquities and fine art from the Art Institute of Chicago and
+            Harvard Art Museums. <br></br>Whether you are a researcher, student,
+            or art enthusiast, click down below and start creating your own
             exhibitions.
           </motion.h1>
           <Link
