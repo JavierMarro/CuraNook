@@ -36,7 +36,7 @@ export const fetchHarvardArtworks = async (
   artworks: HarvardListSummary[];
   info: HarvardApiResponse<HarvardListSummary>["info"];
 }> => {
-  const baseUrl = `https://api.harvardartmuseums.org/object?apikey=${HARVARD_KEY}&size=${size}&page=${page}&fields=${HarvardListFields}`;
+  const baseUrl = `https://api.harvardartmuseums.org/object?apikey=${HARVARD_KEY}&size=${size}&page=${page}&fields=${HarvardListFields}&hasimage=1`; // make sure to display artwork with at least one image
   const res = await fetch(baseUrl);
 
   if (!res.ok) {
@@ -56,6 +56,8 @@ export const fetchHarvardArtworks = async (
 const HarvardArtworkFields = [
   "objectid",
   "primaryimageurl",
+  "images",
+  "baseimageurl",
   "title",
   "dated",
   "artistDisplayName",

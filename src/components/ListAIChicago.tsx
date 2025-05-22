@@ -26,7 +26,7 @@ export function ItemsListAIChicago() {
   if (isError || !data) return <div>Error loading artworks.</div>;
 
   return (
-    <div className="max-w-6xl mx-auto px-4 pt-24">
+    <div className="max-w-6xl mx-auto px-4 pt-5">
       <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">
         Art Institute of Chicago Collection
       </h2>
