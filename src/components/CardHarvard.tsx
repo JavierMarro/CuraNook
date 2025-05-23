@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchHarvardArtworkById } from "@/api/HarvardMuseumAPI";
 import type { HarvardListSummary } from "@/types/HarvardMuseumsInterfaces";
+import { Loading } from "@/ui/Loading";
 
 interface CardHarvardProps {
   artwork: HarvardListSummary;
@@ -52,7 +53,7 @@ export function CardHarvard({ artwork }: CardHarvardProps) {
         </p>
         {expanded && (
           <div className="mt-2 text-xs text-gray-700">
-            {isLoading && <div>Loading details...</div>}
+            {isLoading && <Loading />}
             {details && (
               <>
                 <div>

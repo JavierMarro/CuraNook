@@ -4,6 +4,8 @@ import { fetchHarvardArtworks } from "@/api/HarvardMuseumAPI";
 import { CardHarvard } from "./CardHarvard";
 import type { HarvardListSummary } from "@/types/HarvardMuseumsInterfaces";
 import { Pagination } from "./Pagination";
+import { Loading } from "@/ui/Loading";
+import { Error } from "@/ui/Error";
 
 export function ItemsListHarvard() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -15,8 +17,8 @@ export function ItemsListHarvard() {
     staleTime: 1000 * 60 * 15,
   });
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError || !data) return <div>Error loading artworks.</div>;
+  if (isLoading) return <Loading />;
+  if (isError || !data) return <Error />;
 
   return (
     <div className="max-w-6xl mx-auto px-4 pt-5">
