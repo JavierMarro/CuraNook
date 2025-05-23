@@ -1,3 +1,4 @@
+import { Footer } from "@/components/Footer";
 import { ItemsListAIChicago } from "@/components/ListAIChicago";
 import { ItemsListHarvard } from "@/components/ListHarvard";
 import { NavMenu } from "@/components/NavMenu";
@@ -29,6 +30,7 @@ function Browse() {
         </div>
         {museum === "aichicago" ? <ItemsListAIChicago /> : <ItemsListHarvard />}
       </div>
+      <Footer />
     </>
   );
 }
