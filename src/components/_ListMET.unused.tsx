@@ -1,4 +1,5 @@
-// Created this file to fetch and display MET artworks using TanStack Query, however this API does not support server-side pagination so, for the time being, it won't be used.
+// Created this file to fetch and display MET artworks using TanStack Query
+// however this API does not support server-side pagination so, for the time being, it won't be used.
 
 import { fetchMETArtworks, fetchMETArtwork } from "@/api/_METMuseumAPI.unused";
 import { useQuery, useQueries } from "@tanstack/react-query";

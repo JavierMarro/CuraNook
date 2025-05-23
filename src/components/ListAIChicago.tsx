@@ -6,6 +6,7 @@ import type {
   AIChicagoArtwork,
   AIChicagoApiResponse,
 } from "@/types/AIChicagoInterfaces";
+import { Pagination } from "./Pagination";
 
 export function ItemsListAIChicago() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -45,23 +46,13 @@ export function ItemsListAIChicago() {
       </div>
       <div className="flex flex-col items-center gap-2 mt-4">
         <div className="flex justify-center gap-4 p-5">
-          <button
-            onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
-            disabled={currentPage === 1}
-            className="px-4 py-2 bg-cyan-500 rounded disabled:opacity-50"
-          >
-            Previous
-          </button>
-          <span className="text-base text-black mt-2">
-            Page {currentPage} of {data.pagination.total_pages}
-          </span>
-          <button
-            onClick={() => setCurrentPage((page) => page + 1)}
-            disabled={!data.pagination || !data.pagination.next_url}
-            className="px-4 py-2 bg-cyan-500 rounded disabled:opacity-50"
-          >
-            Next
-          </button>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={data.pagination.total_pages}
+            onPrev={() => setCurrentPage((page) => Math.max(1, page - 1))}
+            onNext={() => setCurrentPage((page) => page + 1)}
+            hasNext={!!data.pagination.next_url}
+          />
         </div>
       </div>
     </div>
