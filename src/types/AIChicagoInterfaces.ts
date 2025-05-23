@@ -1,18 +1,33 @@
-export interface AIChicagoApiResponse<T> {
+export interface AIChicagoSearchResponse<T> {
+  preference: string | null;
   pagination: {
     total: number;
     limit: number;
     offset: number;
     total_pages: number;
     current_page: number;
-    next_url: string | null;
   };
-  data: T[];
+  data: (T & { _score: number })[];
+  info: {
+    license_text: string;
+    license_links: string[];
+    version: string;
+  };
   config: {
     iiif_url: string;
     website_url: string;
   };
 }
+
+// types for sortBy and Order to increase sanitation of queries
+export type ValidSortByChicago =
+  | "title"
+  | "artist_title"
+  | "date_end"
+  | "place_of_origin"
+  | "is_public_domain";
+
+export type ValidOrder = "asc" | "desc";
 
 export interface AIChicagoArtwork {
   id: number;
@@ -31,6 +46,19 @@ export interface AIChicagoArtwork {
   department_title?: string;
   is_public_domain?: boolean;
   credit_line?: string;
+}
+
+export interface AIChicagoAPIResponse {
+  artworks: AIChicagoArtwork[];
+  iiif_url: string;
+  pagination: {
+    total: number;
+    limit: number;
+    offset: number;
+    total_pages: number;
+    current_page: number;
+    next_url: string | null;
+  };
 }
 
 /* ABOUT IMAGES, from https://api.artic.edu/docs/#images
