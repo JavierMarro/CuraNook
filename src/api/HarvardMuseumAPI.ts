@@ -13,10 +13,12 @@
 
 // Link to API docs manipulating data: https://api-toolkit.herokuapp.com/6
 
+import type { ValidOrder } from "@/types/AIChicagoInterfaces";
 import type {
   HarvardApiResponse,
   HarvardListSummary,
   HarvardCardDetailed,
+  ValidSortByHarvard,
 } from "@/types/HarvardMuseumsInterfaces";
 
 const HARVARD_KEY = import.meta.env.VITE_HARVARD_MUSEUMS_API_KEY;
@@ -31,12 +33,18 @@ const HarvardListFields = [
 
 export const fetchHarvardArtworks = async (
   page = 1,
-  size = 15
+  size = 15,
+  sortBy: ValidSortByHarvard = "rank",
+  order: ValidOrder = "asc"
 ): Promise<{
   artworks: HarvardListSummary[];
   info: HarvardApiResponse<HarvardListSummary>["info"];
 }> => {
-  const baseUrl = `https://api.harvardartmuseums.org/object?apikey=${HARVARD_KEY}&size=${size}&page=${page}&fields=${HarvardListFields}&hasimage=1`; // make sure to display artwork with at least one image
+  let queryValues = "";
+  if (sortBy) {
+    queryValues = `&sort=${sortBy}&sortorder=${order}`;
+  }
+  const baseUrl = `https://api.harvardartmuseums.org/object?fields=${HarvardListFields}${queryValues}&hasimage=1&apikey=${HARVARD_KEY}&size=${size}&page=${page}`; // make sure to display artwork with at least one image
   const res = await fetch(baseUrl);
 
   if (!res.ok) {
@@ -47,8 +55,13 @@ export const fetchHarvardArtworks = async (
   // Check if the response is valid and parse it (sames as AIChicago)
   const data: HarvardApiResponse<HarvardListSummary> = await res.json();
 
+  // Filter out items without primary images as a safeguard
+  const filteredRecords = data.records.filter(
+    (record) => record.primaryimageurl
+  );
+
   return {
-    artworks: data.records,
+    artworks: filteredRecords,
     info: data.info,
   };
 };
@@ -59,11 +72,10 @@ const HarvardArtworkFields = [
   "images",
   "baseimageurl",
   "title",
-  "dated",
   "artistDisplayName",
+  "dated",
   "period",
   "culture",
-  "url",
   "classification",
   "medium",
   "technique",

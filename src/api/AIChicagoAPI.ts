@@ -9,6 +9,7 @@ import type {
 // Defining fields to fetch as per API docs best practice (limits the amount of data returned)
 // https://api.artic.edu/docs/#fields
 // https://api.artic.edu/docs/#best-practices
+//TODO: minimise the amount of fields once full implementation is done
 const AIChicagoFields = [
   "id",
   "image_id",
@@ -28,7 +29,7 @@ const AIChicagoFields = [
   "credit_line",
 ].join(",");
 
-// From API docs the following is a translator of sorts between user selection and API needs
+// From API docs the following variable works as an interpreter between user selection and API accessing fields
 export const apiSortAIChicagoFields: Record<ValidSortByChicago, string> = {
   title: "title.keyword",
   artist_title: "artist_title.keyword",
@@ -48,7 +49,7 @@ export const fetchAIChicagoArtworks = async (
     const apiSortField = apiSortAIChicagoFields[sortBy];
     queryValues = `&sort[${apiSortField}]=${order}`;
   }
-  // According to the Art Institute of Chicago API docs, sorting only works with search endpoints
+  // According to the Art Institute of Chicago API docs, sorting only works well with search endpoint
   const baseUrl = `https://api.artic.edu/api/v1/artworks/search?query=*&page=${page}&limit=${limit}&fields=${AIChicagoFields}${queryValues}`;
   const res = await fetch(baseUrl);
 

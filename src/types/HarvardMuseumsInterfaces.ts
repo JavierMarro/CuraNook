@@ -9,6 +9,10 @@ export interface HarvardApiResponse<T> {
   records: T[];
 }
 
+// types for sortBy and Order to increase sanitation of queries
+// Unfortunately Harvard's API does not support title or artist name so within whats available these three sorting queries where chosen
+export type ValidSortByHarvard = "rank" | "accessionyear" | "lastupdate";
+
 export interface HarvardListSummary {
   objectid: number;
   primaryimageurl?: string;
@@ -20,13 +24,12 @@ export interface HarvardListSummary {
 export interface HarvardCardDetailed {
   objectid: number;
   primaryimageurl: string;
-  // images?: { baseimageurl: string }[];
+  images?: { baseimageurl: string }[];
   title: string;
   artistDisplayName: string;
   dated?: string;
   period?: string;
   culture?: string;
-  url?: string;
   classification?: string;
   medium?: string;
   technique?: string;
