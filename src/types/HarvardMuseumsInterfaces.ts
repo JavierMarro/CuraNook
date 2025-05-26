@@ -9,6 +9,9 @@ export interface HarvardApiResponse<T> {
   records: T[];
 }
 
+// types for sortBy and Order to increase sanitation of queries
+export type ValidSortByHarvard = "title" | "artistDisplayName" | "dateend";
+
 export interface HarvardListSummary {
   objectid: number;
   primaryimageurl?: string;
@@ -20,13 +23,12 @@ export interface HarvardListSummary {
 export interface HarvardCardDetailed {
   objectid: number;
   primaryimageurl: string;
-  // images?: { baseimageurl: string }[];
+  images?: { baseimageurl: string }[];
   title: string;
   artistDisplayName: string;
   dated?: string;
   period?: string;
   culture?: string;
-  url?: string;
   classification?: string;
   medium?: string;
   technique?: string;

@@ -1,3 +1,18 @@
+//TODO: See if the following two interfaces can be merged (and check against Pagination component and ListAIChicago component)
+// This interface is used for the response of the AIChicago artworks endpoint
+export interface AIChicagoAPIResponse {
+  artworks: AIChicagoArtwork[];
+  iiif_url: string;
+  pagination: {
+    total: number;
+    limit: number;
+    offset: number;
+    total_pages: number;
+    current_page: number;
+    next_url: string | null;
+  };
+}
+// This interface is used for the response of the AIChicago search endpoint, which is more efficient for sorting and filtering queries
 export interface AIChicagoSearchResponse<T> {
   preference: string | null;
   pagination: {
@@ -26,7 +41,7 @@ export type ValidSortByChicago =
   | "date_end"
   | "place_of_origin"
   | "is_public_domain";
-
+// Decided to reuse this type for order validation for Harvard's API too
 export type ValidOrder = "asc" | "desc";
 
 export interface AIChicagoArtwork {
@@ -46,19 +61,6 @@ export interface AIChicagoArtwork {
   department_title?: string;
   is_public_domain?: boolean;
   credit_line?: string;
-}
-
-export interface AIChicagoAPIResponse {
-  artworks: AIChicagoArtwork[];
-  iiif_url: string;
-  pagination: {
-    total: number;
-    limit: number;
-    offset: number;
-    total_pages: number;
-    current_page: number;
-    next_url: string | null;
-  };
 }
 
 /* ABOUT IMAGES, from https://api.artic.edu/docs/#images
