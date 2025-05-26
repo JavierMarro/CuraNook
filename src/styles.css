@@ -1,12 +1,6 @@
 @import "tailwindcss";
 
-* {
-  font-family: helvetica, sans-serif;
-} /* @import "tw-animate-css";
-@custom-variant dark (&:is(.dark *)); */
-
-/* body {
-  @apply m-0;
+body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -128,4 +122,118 @@
   body {
     @apply bg-background text-foreground;
   }
-} */
+}
+
+.museum-container {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1.25rem;
+}
+
+.museum-title {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: rgb(31, 41, 55);
+}
+
+.museum-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  justify-content: center;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.control-label {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: rgb(55, 65, 81);
+}
+
+.control-select {
+  padding: 0.5rem;
+  border: 1px solid rgb(209, 213, 219);
+  border-radius: 0.25rem;
+  background-color: white;
+}
+
+.artworks-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .artworks-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .artworks-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.artworks-grid-harvard {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .artworks-grid-harvard {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .artworks-grid-harvard {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .artworks-grid-harvard {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.pagination-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.25rem;
+}
+
+.error-fallback {
+  color: rgb(75, 85, 99);
+}
+
+.error-title {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: rgb(31, 41, 55);
+}

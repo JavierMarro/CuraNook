@@ -37,10 +37,8 @@ export function ItemsListHarvard() {
   if (!data || !data.artworks || data.artworks.length === 0) {
     return (
       <>
-        <h2 className="text-3xl font-bold mb-8 text-gray-800">
-          Harvard Art Museums Collection
-        </h2>
-        <p className="text-gray-600">
+        <h2 className="error-title">Harvard Art Museums Collection</h2>
+        <p className="error-fallback">
           No artworks found. Please try different filters.
         </p>
         <Error />
@@ -49,59 +47,52 @@ export function ItemsListHarvard() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 pt-5">
-      <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">
-        Harvard Art Museums Collection
-      </h2>
-      <div className="flex gap-4 mb-4 justify-center">
-        <div className="flex flex-col gap-1">
-          <label
-            htmlFor="sort-by"
-            className="text-sm font-medium text-gray-700"
-          >
+    <div className="museum-container">
+      <h2 className="museum-title">Harvard Art Museums Collection</h2>
+      <div className="museum-controls">
+        <div className="control-group">
+          <label htmlFor="sort-by" className="control-label">
             Sort by:
           </label>
           <select
             id="sort-by"
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as ValidSortByHarvard)}
-            className="p-2 border rounded bg-white"
+            className="control-select"
           >
             <option value="rank">Popularity</option>
             <option value="accessionyear">Accession Year</option>
             <option value="lastupdate">Recently Updated</option>
           </select>
         </div>
-        <div className="flex flex-col gap-1">
-          <label
-            htmlFor="sort-order"
-            className="text-sm font-medium text-gray-700"
-          >
+        <div className="control-group">
+          <label htmlFor="sort-order" className="control-label">
             Order:
           </label>
           <select
             id="sort-order"
             value={order}
             onChange={(e) => setOrder(e.target.value as ValidOrder)}
-            className="p-2 border rounded bg-white"
+            className="control-select"
           >
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
           </select>
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
+      <div className="artworks-grid-harvard">
         {data.artworks.map((artwork: HarvardListSummary) => (
           <CardHarvard key={artwork.objectid} artwork={artwork} />
         ))}
       </div>
-      <div className="flex flex-col items-center gap-2 mt-4">
-        <div className="flex justify-center gap-4 p-5">
+      <div className="pagination-container">
+        <div className="pagination-wrapper">
           <Pagination
             currentPage={currentPage}
             totalPages={data.info.pages}
             onPrev={() => setCurrentPage((page) => Math.max(1, page - 1))}
             onNext={() => setCurrentPage((page) => page + 1)}
+            onPageChange={(page) => setCurrentPage(page)}
             hasNext={!!data.info.next}
           />
         </div>
