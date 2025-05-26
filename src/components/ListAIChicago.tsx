@@ -20,8 +20,8 @@ export function ItemsListAIChicago() {
     queryKey: ["AIChicagoArtworksData", currentPage, sortBy, order],
     queryFn: () => fetchAIChicagoArtworks(currentPage, 15, sortBy, order),
     placeholderData: (previousData) => previousData, // Keeps previous data visible while new data loads
-    staleTime: 1000 * 60 * 15, // From tutorial (https://www.youtube.com/watch?v=w9r55wd2CAk), this avoids fresh requests (15mins). It controls how long before it's considered stale.
-    //If my understanding is correct, this is the TanStack alternative to useEffect
+    staleTime: 1000 * 60 * 15, // From tutorial (https://www.youtube.com/watch?v=w9r55wd2CAk)
+    // The above avoids fresh requests (15mins). It controls how long before it's considered stale.
   });
 
   useEffect(() => {
@@ -32,50 +32,40 @@ export function ItemsListAIChicago() {
   if (isError || !data) return <Error />;
 
   return (
-    <div className="max-w-6xl mx-auto px-4 pt-5">
-      <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">
-        Art Institute of Chicago Collection
-      </h2>
-      <div className="flex gap-4 mb-4 justify-center">
-        <div className="flex flex-col gap-1">
-          <label
-            htmlFor="sort-by"
-            className="text-sm font-medium text-gray-700"
-          >
+    <div className="museum-container">
+      <h2 className="museum-title">Art Institute of Chicago Collection</h2>
+      <div className="museum-controls">
+        <div className="control-group">
+          <label htmlFor="sort-by" className="control-label">
             Sort by:
           </label>
           <select
             id="sort-by"
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as ValidSortByChicago)}
-            className="p-2 border rounded bg-white"
+            className="control-select"
           >
             <option value="title">Title</option>
             <option value="artist_title">Artist</option>
-            <option value="date_end">Date</option>
-            <option value="place_of_origin">Place of Origin</option>
             <option value="is_public_domain">Public Domain Status</option>
           </select>
         </div>
-        <div className="flex flex-col gap-1">
-          <label
-            htmlFor="sort-order"
-            className="text-sm font-medium text-gray-700"
-          >
+        <div className="control-group">
+          <label htmlFor="sort-order" className="control-label">
             Order:
           </label>
           <select
             id="sort-order"
             value={order}
             onChange={(e) => setOrder(e.target.value as ValidOrder)}
-            className="p-2 border rounded bg-white"
+            className="control-select"
           >
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
           </select>
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="artworks-grid">
         {data.artworks.map((artwork) => (
           <CardAIChicago
             key={artwork.id}
@@ -88,14 +78,14 @@ export function ItemsListAIChicago() {
           />
         ))}
       </div>
-      <div className="flex flex-col items-center gap-2 mt-4">
-        <div className="flex justify-center gap-4 p-5">
+      <div className="pagination-container">
+        <div className="pagination-wrapper">
           <Pagination
             currentPage={currentPage}
             totalPages={data.pagination.total_pages}
             onPrev={() => setCurrentPage((page) => Math.max(1, page - 1))}
             onNext={() => setCurrentPage((page) => page + 1)}
-            hasNext={!!data.pagination.next_url}
+            hasNext={!!data.pagination.next_url} //!! gets a clean boolean and so checks if next_url is not null
           />
         </div>
       </div>

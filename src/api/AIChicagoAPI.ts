@@ -9,13 +9,12 @@ import type {
 // Defining fields to fetch as per API docs best practice (limits the amount of data returned)
 // https://api.artic.edu/docs/#fields
 // https://api.artic.edu/docs/#best-practices
-//TODO: minimise the amount of fields once full implementation is done
+
 const AIChicagoFields = [
   "id",
   "image_id",
   "title",
   "date_display",
-  "date_end",
   "artist_title",
   "place_of_origin",
   "artwork_type_title",
@@ -29,12 +28,10 @@ const AIChicagoFields = [
   "credit_line",
 ].join(",");
 
-// From API docs the following variable works as an interpreter between user selection and API accessing fields
+// From API docs the following object works as an interpreter between user selection and API accessing fields (.keyword)
 export const apiSortAIChicagoFields: Record<ValidSortByChicago, string> = {
   title: "title.keyword",
   artist_title: "artist_title.keyword",
-  date_end: "date_end",
-  place_of_origin: "place_of_origin.keyword",
   is_public_domain: "is_public_domain",
 };
 

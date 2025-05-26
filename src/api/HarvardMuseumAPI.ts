@@ -1,17 +1,4 @@
-// From Harvard API docs:
-// The structure of a query follows a pattern. The four basic components are:
-
-// Harvard Art Museums URL + Resource + Filter (optional) + API key
-// All of the objects made in the year 2000:
-// https://api.harvardartmuseums.org/	object	?	yearmade=2002	&	apikey=KEY_GOES_HERE
-// URL	                              Resource		Filter		     API
-
-// By default there is a default of 10 items per page (max would be 50). In order to choose a custom amount:
-// In order to increase the size of records in each page to 50, append "&size=50" to the end of your query.
-// https://api.harvardartmuseums.org/	object	?	apikey=0000-0000-0000-0000	&	size=50
-// URL                              	Resource		API		                      Filter
-
-// Link to API docs manipulating data: https://api-toolkit.herokuapp.com/6
+// Link to API docs accessing API data: https://api-toolkit.herokuapp.com/6
 
 import type { ValidOrder } from "@/types/AIChicagoInterfaces";
 import type {
@@ -23,6 +10,7 @@ import type {
 
 const HARVARD_KEY = import.meta.env.VITE_HARVARD_MUSEUMS_API_KEY;
 
+//Following block of code for initial data fetching of small card view of artworks
 const HarvardListFields = [
   "objectid",
   "primaryimageurl",
@@ -52,7 +40,7 @@ export const fetchHarvardArtworks = async (
       `Failed to fetch artworks: ${res.status} ${res.statusText}`
     );
   }
-  // Check if the response is valid and parse it (sames as AIChicago)
+
   const data: HarvardApiResponse<HarvardListSummary> = await res.json();
 
   // Filter out items without primary images as a safeguard
@@ -66,7 +54,8 @@ export const fetchHarvardArtworks = async (
   };
 };
 
-const HarvardArtworkFields = [
+// Following block of code displays all fields I deemed interesting for artwork expanded view
+const HarvardExpandedFields = [
   "objectid",
   "primaryimageurl",
   "images",
@@ -89,7 +78,7 @@ export const fetchHarvardArtworkById = async (
   objectId: number
 ): Promise<HarvardCardDetailed> => {
   const res = await fetch(
-    `https://api.harvardartmuseums.org/object/${objectId}?apikey=${HARVARD_KEY}&fields=${HarvardArtworkFields}`
+    `https://api.harvardartmuseums.org/object/${objectId}?apikey=${HARVARD_KEY}&fields=${HarvardExpandedFields}`
   );
   if (!res.ok) throw new Error("Failed to fetch artwork data");
   return res.json();
