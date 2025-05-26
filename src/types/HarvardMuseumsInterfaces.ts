@@ -10,7 +10,8 @@ export interface HarvardApiResponse<T> {
 }
 
 // types for sortBy and Order to increase sanitation of queries
-export type ValidSortByHarvard = "title" | "artistDisplayName" | "dateend";
+// Unfortunately Harvard's API does not support title or artist name so within whats available these three sorting queries where chosen
+export type ValidSortByHarvard = "rank" | "accessionyear" | "lastupdate";
 
 export interface HarvardListSummary {
   objectid: number;
