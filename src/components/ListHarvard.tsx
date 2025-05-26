@@ -92,6 +92,7 @@ export function ItemsListHarvard() {
             totalPages={data.info.pages}
             onPrev={() => setCurrentPage((page) => Math.max(1, page - 1))}
             onNext={() => setCurrentPage((page) => page + 1)}
+            onPageChange={(page) => setCurrentPage(page)}
             hasNext={!!data.info.next}
           />
         </div>

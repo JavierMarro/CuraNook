@@ -85,6 +85,7 @@ export function ItemsListAIChicago() {
             totalPages={data.pagination.total_pages}
             onPrev={() => setCurrentPage((page) => Math.max(1, page - 1))}
             onNext={() => setCurrentPage((page) => page + 1)}
+            onPageChange={(page) => setCurrentPage(page)}
             hasNext={!!data.pagination.next_url} //!! gets a clean boolean and so checks if next_url is not null
           />
         </div>
