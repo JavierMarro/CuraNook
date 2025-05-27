@@ -1,12 +1,12 @@
 // Link to API docs accessing API data: https://api-toolkit.herokuapp.com/6
 
-import type { ValidOrder } from "@/types/AIChicagoInterfaces";
 import type {
   HarvardApiResponse,
   HarvardListSummary,
   HarvardCardDetailed,
   ValidSortByHarvard,
 } from "@/types/HarvardMuseumsInterfaces";
+import type { ValidOrder } from "@/types/AIChicagoInterfaces"; // Reusing ValidOrder type from AIChicagoInterfaces
 
 const HARVARD_KEY = import.meta.env.VITE_HARVARD_MUSEUMS_API_KEY;
 

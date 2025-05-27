@@ -6,7 +6,7 @@ export function Loading() {
       <h2>Loading contents...</h2>
       <div className="lottie-gif w-100 h-100">
         <DotLottieReact
-          src="https://lottie.host/81ec2187-ce6d-44f2-be90-b402a8b82b3b/qcekLszBvT.json"
+          src="https://lottie.host/3c5a1f44-8bee-49fc-a0bb-c89698dbd088/YRwlnz4xaH.json"
           loop
           autoplay
         />

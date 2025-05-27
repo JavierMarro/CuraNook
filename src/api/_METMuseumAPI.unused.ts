@@ -21,3 +21,5 @@ export const fetchMETArtwork = async (
   if (!res) throw new Error("Failed to fetch artwork data");
   return res;
 };
+
+//TODO: Ultimately decided not to use this API due to pagination having to be done client side rather than server side. Look into trying again in the future.
