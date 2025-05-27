@@ -28,7 +28,7 @@ const AIChicagoFields = [
   "credit_line",
 ].join(",");
 
-// From API docs the following object works as an interpreter between user selection and API accessing fields (.keyword)
+// From API docs the following object will work as an interpreter between user selection and API accessing fields (.keyword)
 export const apiSortAIChicagoFields: Record<ValidSortByChicago, string> = {
   title: "title.keyword",
   artist_title: "artist_title.keyword",
@@ -46,7 +46,7 @@ export const fetchAIChicagoArtworks = async (
     const apiSortField = apiSortAIChicagoFields[sortBy];
     queryValues = `&sort[${apiSortField}]=${order}`;
   }
-  // According to the Art Institute of Chicago API docs, sorting only works well with search endpoint
+  // Initially /artworks endpoint used but according to the Art Institute of Chicago API docs, sorting only works well with search endpoint
   const baseUrl = `https://api.artic.edu/api/v1/artworks/search?query=*&page=${page}&limit=${limit}&fields=${AIChicagoFields}${queryValues}`;
   const res = await fetch(baseUrl);
 
@@ -55,9 +55,10 @@ export const fetchAIChicagoArtworks = async (
       `Failed to fetch artworks: ${res.status} ${res.statusText}`
     );
   }
-  // Check if the response is valid and parse it
+  // Self-reminder: variable data checks if the response is valid and parse it with .json()
   const data: AIChicagoSearchResponse<AIChicagoArtwork> = await res.json();
 
+  // In this return block I'm transforming the search response to match expected component interface format
   return {
     artworks: data.data, // This data does not have imageURL, because of the nature of the data structure from this API the imageUrl will be added in component
     iiif_url: data.config.iiif_url,

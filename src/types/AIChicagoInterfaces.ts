@@ -1,5 +1,4 @@
-//TODO: See if the following two interfaces can be merged (and check against Pagination component and ListAIChicago component)
-// This interface is used for the response of the AIChicago artworks endpoint
+// This interface is used for the response of the AIChicago artworks endpoint (used initially when started to fetch data for this project)
 export interface AIChicagoAPIResponse {
   artworks: AIChicagoArtwork[];
   iiif_url: string;
@@ -36,7 +35,7 @@ export interface AIChicagoSearchResponse<T> {
 
 // types for sortBy and Order to increase sanitation of queries
 export type ValidSortByChicago = "title" | "artist_title" | "is_public_domain";
-// Decided to reuse this type for order validation for Harvard's API too
+// Decided to reuse the type below for order validation for Harvard's API too
 export type ValidOrder = "asc" | "desc";
 
 export interface AIChicagoArtwork {
