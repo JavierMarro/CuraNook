@@ -4,11 +4,12 @@
 
 1. [Project description](#project-description)
 2. [Set up instructions](#set-up-instructions)
-3. [Features](#features)
-4. [Technologies used](#technologies-used)
-5. [API Integration](#api-integration)
-6. [Documentation](#documentation)
-7. [Resources](#resources)
+3. [Technologies used](#technologies-used)
+4. [API Integration](#api-integration)
+5. [Documentation](#documentation)
+6. [Resources](#resources)
+7. [Contributing](#contributing)
+8. [Contact](#contact)
 
 ## Project description:
 
@@ -22,10 +23,8 @@ CuraNook is an exhibition curation platform that enables users to explore virtua
 - Detailed artwork views with images and essential information
 - Loading States: Visual feedback during data fetching
 - Error Handling: Clear error messages for failed requests or missing data
-- Responsive design that adapts to various screen sizes
+- Responsive design that adapts to various screen sizes (tablets WIP!)
 - Accessible interface supporting screen readers and keyboard navigation
-
-The platform integrates with two major museum APIs to provide users with access to thousands of artworks, enabling them to discover and explore art from different institutions in one unified interface.
 
 <!--
 Adding the following once integrated in project:
@@ -48,17 +47,15 @@ Please follow these steps in order to run this project locally:
 
 #### - Fork and/or clone the repository
 
-You can fork this repository to your own GitHub account, then choose a directory where to clone it using the following command:
+Firstly, fork this repository to your own GitHub account, then using the terminal choose a directory and tweak the following command to add your username and clone the repo to the directory:
 
 ```bash
-git clone https://github.com/JavierMarro/curanook.git
+git clone https://github.com/your_username/curanook.git
 ```
-
-Alternatively you can skip the fork step and directly clone it.
 
 #### - Install dependencies
 
-Once the repository has been cloned, run the command below at the root directory to install the required dependencies:
+Once the repository has been forked and cloned, run the command below at the root directory to install the required dependencies:
 
 ```bash
 # Using pnpm (recommended)
@@ -70,14 +67,7 @@ npm install
 
 #### - Set up environment variables
 
-Create a `.env` file in the root directory and add your API keys:
-
-```bash
-# Copy the example environment file
-cp .env.example .env
-```
-
-Add your Harvard Museums API key to the `.env` file:
+Create a new `.env` file in the root directory or rename the `.env.example` file and add your Harvard Museums API key:
 
 ```env
 VITE_HARVARD_MUSEUMS_API_KEY=your_harvard_api_key_here
@@ -114,11 +104,10 @@ The development server will start on `http://localhost:3000`. You can either hol
 
 - **Aceternity UI** - Beautiful component library for landing page elements which also integrates Framer Motion for smooth animations and transitions
 - **Lucide React** - Icon library
-- **Lottie** - Loading/Error animations
+- **LottieFiles** - Loading/Error animations
 
 **Development Tools:**
 
-- **Vitest** - Unit testing framework
 - **pnpm** - Fast, disk space efficient package manager
 
 ## API Integration:
@@ -139,13 +128,13 @@ This platform integrates with two major museum APIs to provide comprehensive acc
 - No API key required
 - Features one of the world's oldest and largest art collections
 - Supports sorting by title, artist, and public domain status
-- Includes IIIF image service for high-quality artwork images
 
 **Security Best Practices:**
 
 - API keys are stored securely in environment variables
 - Frontend uses environment variables with `VITE_` prefix for safe client-side access
 - No sensitive data is exposed in the client bundle
+- Sanitation of API sorting queries (encodeURIComponent)
 
 ## Documentation:
 
@@ -156,7 +145,7 @@ The application follows a modern React architecture with the following structure
 ```
 src/
 ├── api/           # API integration and data fetching
-├── components/    # Reusable UI components
+├── components/    # API UI components
 ├── hooks/         # Custom React hooks
 ├── lib/           # Utility functions
 ├── routes/        # Page components and routing
@@ -173,7 +162,6 @@ src/
 - **`ListAIChicago` & `ListHarvard`**: Main collection browsing components
 - **`CardAIChicago` & `CardHarvard`**: Individual artwork display cards
 - **`Pagination`**: Reusable pagination component
-- **`Loading` & `Error`**: Shared UI state components
 
 ### Data Flow
 
@@ -181,6 +169,43 @@ src/
 2. **Data Fetching**: TanStack Query manages API calls with caching and error handling
 3. **State Management**: React hooks manage pagination and sorting
 4. **UI Updates**: Components re-render based on data and user interactions
+
+### API Data Architecture
+
+**Data Structure Preservation:**
+
+When approaching this project I had to decide whether to preserve the original APIs response structures or transform the data at the API layer. I went for preserving the original data structure for several reasons:
+
+- **Metadata access**: Components can access all available fields from each API
+- **Performance**: No additional processing overhead during data fetching
+- **Flexibility**: Easy to access new fields without modifying API functions
+- **Debugging**: Simplified data tracing from API to component
+- **Type safety**: TypeScript interfaces ensure compile-time validation
+- **UX**: Give users the option to browse from one source or another
+
+**API response handling:**
+
+```typescript
+// Art Institute of Chicago - returns native structure
+{
+  artworks: AIChicagoArtwork[];     // Raw API data
+  iiif_url: string;                // Image URL construction base
+  pagination: PaginationInfo;      // Native pagination data
+}
+
+// Harvard Museums - returns native structure
+{
+  artworks: HarvardListSummary[];  // Raw API data
+  info: HarvardApiInfo;            // Native pagination and metadata
+}
+```
+
+**Trade offs considered:**
+
+- **Current approach**: Optimal for rich data access and flexible component design
+- **Alternative (data transformation)**: Would be necessary to avoid code repetition when scaling beyond 3-4 APIs
+
+This design supports the current dropdown museum selection while maintaining flexibility for future features like title based search without requiring architectural changes.
 
 ## Resources:
 
@@ -193,7 +218,7 @@ src/
 
 **UI Components:**
 
-- [Aceternity UI](https://ui.aceternity.com/components) - Components used: Lamp Section Header, Typewriter Effect, Navbar Menu, Expandable Cards and Tailwind CSS buttons
+- [Aceternity UI](https://ui.aceternity.com/components) - Components used: Lamp Section Header, Typewriter Effect, Navbar Menu, Expandable Cards, Lens and Tailwind CSS buttons
 
 **Learning Resources:**
 
@@ -204,6 +229,7 @@ src/
 - [Video - Front-End Project using TanStack features](https://www.youtube.com/watch?v=Qa5AisZTtH8)
 - [Video - Fetching and displaying data with TanStack loaders](https://www.youtube.com/watch?v=FYloHKTrRnI)
 - [Video - TS Query and network requests](https://www.youtube.com/watch?v=w9r55wd2CAk)
+- [Article - Fetching Data with TS Queries](https://antematter.io/blogs/simplify-api-data-fetching-with-tanstack-queries)
 
 **TypeScript:**
 
@@ -217,6 +243,21 @@ src/
 
 **Additional Resources:**
 
-- [GitHub](https://github.com/) - Version control
-- [Medium - Software Engineering](https://medium.com/?tag=software-engineering) - Technical articles
-- [FreeCodeCamp](https://www.freecodecamp.org/news/) - Web development tutorials
+- [GitHub](https://github.com/) - Version control & Forums to find solutions to issues encountered
+- [Stack Overflow](https://stackoverflow.com/questions) - Forums to find solutions to issues encountered
+- [Medium - Software Engineering](https://medium.com/?tag=software-engineering) - Web dev articles
+- [FreeCodeCamp](https://www.freecodecamp.org/news/) - Web dev tutorials
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature branch (`git checkout -b feature/Mind-blowingFeature`)
+3. Commit your changes (`git commit -m 'Write here a descriptive message about your mind-blowing feature'`)
+4. Push to the branch (`git push origin feature/Mind-blowingFeature`)
+5. Open a Pull Request
+
+## Contact
+
+You can get in touch by opening an issue in this repo [here](https://github.com/JavierMarro/curanook/issues) and I will get back to you as soon as possible.

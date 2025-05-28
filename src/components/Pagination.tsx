@@ -19,12 +19,12 @@ export function Pagination({
   hasNext = currentPage < totalPages,
   hasPrev = currentPage > 1,
 }: PaginationProps) {
-  const [isEditingPage, setIsEditingPage] = useState(false);
+  const [editingPage, setEditingPage] = useState(false);
   const [editValue, setEditValue] = useState("");
 
   const handleCurrentPageClick = () => {
     if (onPageChange) {
-      setIsEditingPage(true);
+      setEditingPage(true);
       setEditValue(currentPage.toString());
     }
   };
@@ -35,12 +35,12 @@ export function Pagination({
     if (pageNumber >= 1 && pageNumber <= totalPages && onPageChange) {
       onPageChange(pageNumber);
     }
-    setIsEditingPage(false);
+    setEditingPage(false);
     setEditValue("");
   };
 
   const handleCurrentPageBlur = () => {
-    setIsEditingPage(false);
+    setEditingPage(false);
     setEditValue("");
   };
 
@@ -55,7 +55,7 @@ export function Pagination({
       </button>
       <span className="text-base text-black mt-2">
         Page{" "}
-        {isEditingPage ? (
+        {editingPage ? (
           <form onSubmit={handleCurrentPageSubmit} className="inline">
             <input
               type="number"

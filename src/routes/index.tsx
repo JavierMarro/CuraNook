@@ -43,7 +43,7 @@ function App() {
               duration: 0.8,
               ease: "easeInOut",
             }}
-            className="mt-4 md:mt-8 max-w-2xl px-5 md:px-0 bg-gradient-to-br from-slate-500 to-black py-2 md:py-4 bg-clip-text text-center text-lg  md:text-2xl font-medium tracking-tight text-transparent"
+            className="mt-4 md:mt-8 max-w-2xl px-5 md:px-0 bg-gradient-to-br from-slate-500 to-black py-2 md:py-4 bg-clip-text text-center text-lg/9 md:text-xl/10 lg:text-2xl/10 2xl:text-3xl/13 font-medium tracking-tight text-transparent"
           >
             CuraNook is a platform where you can explore collections of
             antiquities and fine art from the Art Institute of Chicago and

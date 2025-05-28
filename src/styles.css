@@ -205,12 +205,6 @@ body {
   }
 }
 
-@media (min-width: 1280px) {
-  .artworks-grid-harvard {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
-}
-
 .pagination-container {
   display: flex;
   flex-direction: column;
