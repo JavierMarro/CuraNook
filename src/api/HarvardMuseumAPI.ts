@@ -28,11 +28,15 @@ export const fetchHarvardArtworks = async (
   artworks: HarvardListSummary[];
   info: HarvardApiResponse<HarvardListSummary>["info"];
 }> => {
-  let queryValues = "";
+  let sortingValues = "";
   if (sortBy) {
-    queryValues = `&sort=${sortBy}&sortorder=${order}`;
+    sortingValues = `&sort=${encodeURIComponent(
+      sortBy
+    )}&sortorder=${encodeURIComponent(order)}`;
   }
-  const baseUrl = `https://api.harvardartmuseums.org/object?fields=${HarvardListFields}${queryValues}&hasimage=1&apikey=${HARVARD_KEY}&size=${size}&page=${page}`; // make sure to display artwork with at least one image
+  const baseUrl = `https://api.harvardartmuseums.org/object?fields=${encodeURIComponent(
+    HarvardListFields
+  )}${sortingValues}&hasimage=1&apikey=${HARVARD_KEY}&size=${size}&page=${page}`; // make sure to display artwork with at least one image
   const res = await fetch(baseUrl);
 
   if (!res.ok) {
@@ -78,7 +82,9 @@ export const fetchHarvardArtworkById = async (
   objectId: number
 ): Promise<HarvardCardDetailed> => {
   const res = await fetch(
-    `https://api.harvardartmuseums.org/object/${objectId}?apikey=${HARVARD_KEY}&fields=${HarvardExpandedFields}`
+    `https://api.harvardartmuseums.org/object/${objectId}?apikey=${HARVARD_KEY}&fields=${encodeURIComponent(
+      HarvardExpandedFields
+    )}`
   );
   if (!res.ok) throw new Error("Failed to fetch artwork data");
   return res.json();

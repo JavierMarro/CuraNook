@@ -47,7 +47,7 @@ Please follow these steps in order to run this project locally:
 
 #### - Fork and/or clone the repository
 
-Firstly, fork this repository to your own GitHub account and choose a directory where to clone it, then tweak the following command and add your username:
+Firstly, fork this repository to your own GitHub account, then using the terminal choose a directory and tweak the following command to add your username and clone the repo to the directory:
 
 ```bash
 git clone https://github.com/your_username/curanook.git
@@ -134,7 +134,7 @@ This platform integrates with two major museum APIs to provide comprehensive acc
 - API keys are stored securely in environment variables
 - Frontend uses environment variables with `VITE_` prefix for safe client-side access
 - No sensitive data is exposed in the client bundle
-- Sanitation of API queries
+- Sanitation of API sorting queries (encodeURIComponent)
 
 ## Documentation:
 
@@ -162,7 +162,6 @@ src/
 - **`ListAIChicago` & `ListHarvard`**: Main collection browsing components
 - **`CardAIChicago` & `CardHarvard`**: Individual artwork display cards
 - **`Pagination`**: Reusable pagination component
-- **`Loading` & `Error`**: Shared UI state components
 
 ### Data Flow
 
@@ -204,7 +203,7 @@ When approaching this project I had to decide whether to preserve the original A
 **Trade offs considered:**
 
 - **Current approach**: Optimal for rich data access and flexible component design
-- **Alternative (data transformation)**: Would be necessary for unified search across multiple APIs or when scaling beyond 3-4 APIs
+- **Alternative (data transformation)**: Would be necessary to avoid code repetition when scaling beyond 3-4 APIs
 
 This design supports the current dropdown museum selection while maintaining flexibility for future features like title based search without requiring architectural changes.
 
@@ -219,7 +218,7 @@ This design supports the current dropdown museum selection while maintaining fle
 
 **UI Components:**
 
-- [Aceternity UI](https://ui.aceternity.com/components) - Components used: Lamp Section Header, Typewriter Effect, Navbar Menu, Expandable Cards and Tailwind CSS buttons
+- [Aceternity UI](https://ui.aceternity.com/components) - Components used: Lamp Section Header, Typewriter Effect, Navbar Menu, Expandable Cards, Lens and Tailwind CSS buttons
 
 **Learning Resources:**
 
@@ -230,6 +229,7 @@ This design supports the current dropdown museum selection while maintaining fle
 - [Video - Front-End Project using TanStack features](https://www.youtube.com/watch?v=Qa5AisZTtH8)
 - [Video - Fetching and displaying data with TanStack loaders](https://www.youtube.com/watch?v=FYloHKTrRnI)
 - [Video - TS Query and network requests](https://www.youtube.com/watch?v=w9r55wd2CAk)
+- [Article - Fetching Data with TS Queries](https://antematter.io/blogs/simplify-api-data-fetching-with-tanstack-queries)
 
 **TypeScript:**
 

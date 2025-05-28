@@ -116,7 +116,7 @@ export function CardAIChicago({ artwork }: ArtworkCardProps) {
                     exit={{ opacity: 0 }}
                     className="px-4 py-3 text-sm rounded-full font-bold bg-cyan-200 text-black hover:bg-cyan-500 transition-colors flex-shrink-0"
                   >
-                    Save
+                    Save to <br></br> collection
                   </motion.button>
                 </div>
                 <div className="flex-1 overflow-y-auto px-4 pb-4 min-h-0">
@@ -280,7 +280,7 @@ export function CardAIChicago({ artwork }: ArtworkCardProps) {
                 e.stopPropagation(); // Prevent card expansion when clicking the button
               }}
             >
-              Save
+              Save to<br></br> collection
             </button>
           </div>
         </div>

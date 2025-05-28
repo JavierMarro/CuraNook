@@ -21,16 +21,16 @@ export function NavMenu({ className }: { className?: string }) {
           setActive={setActive}
           active={active}
           activeProps={{ className: "font-bold" }}
-          item="Your Collections"
+          item="My Collections"
           to="/collections"
         ></MenuItem>
-        <MenuItem
+        {/* TODO: <MenuItem
           setActive={setActive}
           active={active}
           activeProps={{ className: "font-bold" }}
           item="Log in"
           to="/login"
-        ></MenuItem>
+        ></MenuItem> */}
       </Menu>
     </div>
   );

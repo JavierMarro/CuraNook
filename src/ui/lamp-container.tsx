@@ -74,7 +74,7 @@ export const LampContainer = ({
             duration: 0.8,
             ease: "easeInOut",
           }}
-          className="absolute inset-auto z-30 h-36 w-64 -translate-y-[3rem] sm:-translate-y-[-3rem] md:-translate-y-[-2rem] lg:-translate-y-[0rem] xl:-translate-y-[-1rem] 2xl:-translate-y-[-2rem] rounded-full bg-cyan-500 blur-2xl"
+          className="absolute inset-auto z-30 h-36 w-64 -translate-y-[3rem] sm:-translate-y-[-3rem] md:-translate-y-[-2rem] lg:-translate-y-[0rem] xl:-translate-y-[-1rem] 2xl:-translate-y-[-2rem] rounded-full bg-cyan-200 blur-2xl"
         ></motion.div>
         <motion.div
           initial={{ width: "8rem" }}

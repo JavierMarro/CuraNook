@@ -41,13 +41,17 @@ export const fetchAIChicagoArtworks = async (
   sortBy: ValidSortByChicago = "title",
   order: ValidOrder = "asc"
 ): Promise<AIChicagoAPIResponse> => {
-  let queryValues = "";
+  let sortingValues = "";
   if (sortBy && apiSortAIChicagoFields[sortBy]) {
     const apiSortField = apiSortAIChicagoFields[sortBy];
-    queryValues = `&sort[${apiSortField}]=${order}`;
+    sortingValues = `&sort[${encodeURIComponent(
+      apiSortField
+    )}]=${encodeURIComponent(order)}`;
   }
   // Initially /artworks endpoint used but according to the Art Institute of Chicago API docs, sorting only works well with search endpoint
-  const baseUrl = `https://api.artic.edu/api/v1/artworks/search?query=*&page=${page}&limit=${limit}&fields=${AIChicagoFields}${queryValues}`;
+  const baseUrl = `https://api.artic.edu/api/v1/artworks/search?query=*&fields=${encodeURIComponent(
+    AIChicagoFields
+  )}${sortingValues}&page=${page}&limit=${limit}`;
   const res = await fetch(baseUrl);
 
   if (!res.ok) {
@@ -58,7 +62,6 @@ export const fetchAIChicagoArtworks = async (
 
   const data: AIChicagoSearchResponse<AIChicagoArtwork> = await res.json();
 
-  // In this return block I'm transforming the search response to match expected component interface format
   return {
     artworks: data.data, // This data does not have imageURL, because of the nature of the data structure from this API the imageUrl will be added in component
     iiif_url: data.config.iiif_url,
