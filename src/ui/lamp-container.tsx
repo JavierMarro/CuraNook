@@ -74,7 +74,7 @@ export const LampContainer = ({
             duration: 0.8,
             ease: "easeInOut",
           }}
-          className="absolute inset-auto z-30 h-36 w-64 -translate-y-9 sm:-translate-y-[0rem] md:-translate-y-[0rem] lg:-translate-y-[0rem] xl:-translate-y-[3rem] rounded-full bg-cyan-100 blur-2xl"
+          className="absolute inset-auto z-30 h-36 w-64 -translate-y-[3rem] sm:-translate-y-[-3rem] md:-translate-y-[-2rem] lg:-translate-y-[0rem] xl:-translate-y-[-1rem] 2xl:-translate-y-[-2rem] rounded-full bg-cyan-500 blur-2xl"
         ></motion.div>
         <motion.div
           initial={{ width: "8rem" }}
@@ -84,18 +84,14 @@ export const LampContainer = ({
             duration: 0.8,
             ease: "easeInOut",
           }}
-          className="
-    absolute inset-auto z-50 h-0.5
-    w-3/4 sm:w-[24rem] md:w-[30rem]
-    -translate-y-45 sm:-translate-y-[2rem] md:-translate-y-[2rem] lg:-translate-y-[4rem] xl:-translate-y-[10rem]
-    bg-cyan-500
+          className=" absolute inset-auto z-50 h-0.5 w-3/4 sm:w-[24rem] md:w-[30rem] -translate-y-[8rem] sm:-translate-y-[2rem] md:-translate-y-[5rem] lg:-translate-y-[3rem] xl:-translate-y-[4rem] 2xl:-translate-y-[5rem] bg-cyan-500
   "
         ></motion.div>
 
         <div className="absolute inset-auto z-40 h-60 w-full -translate-y-[19.5rem] bg-slate-100 "></div>
       </div>
 
-      <div className="relative z-50 flex flex-col items-center px-2 sm:px-5 -translate-y-85 sm:-translate-y-6 md:-translate-y-18 lg:-translate-y-30 xl:-translate-y-50">
+      <div className="relative z-50 flex -translate-y-45 sm:-translate-y-20 md:-translate-y-20 xl:-translate-y-25 2xl:-translate-y-45 flex-col items-center px-5">
         {children}
       </div>
     </div>

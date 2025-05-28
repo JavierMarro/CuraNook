@@ -20,7 +20,7 @@ export function ItemsListAIChicago() {
     queryKey: ["AIChicagoArtworksData", currentPage, sortBy, order],
     queryFn: () => fetchAIChicagoArtworks(currentPage, 15, sortBy, order),
     placeholderData: (previousData) => previousData, // Keeps previous data visible while new data loads
-    staleTime: 1000 * 60 * 15, // From tutorial (https://www.youtube.com/watch?v=w9r55wd2CAk)
+    staleTime: 1000 * 60 * 15, // From (https://www.youtube.com/watch?v=w9r55wd2CAk)
     // The above avoids fresh requests (15mins). It controls how long before it's considered stale.
   });
 
@@ -70,7 +70,7 @@ export function ItemsListAIChicago() {
           <CardAIChicago
             key={artwork.id}
             artwork={{
-              ...artwork, // Self-note: Spread operator makes shallow copy of object and adds imageUrl. This is a workaround to avoid modifying the original object
+              ...artwork,
               imageUrl: artwork.image_id
                 ? `${data.iiif_url}/${artwork.image_id}/full/843,/0/default.jpg`
                 : undefined,
@@ -86,7 +86,11 @@ export function ItemsListAIChicago() {
             onPrev={() => setCurrentPage((page) => Math.max(1, page - 1))}
             onNext={() => setCurrentPage((page) => page + 1)}
             onPageChange={(page) => setCurrentPage(page)}
-            hasNext={!!data.pagination.next_url} //!! gets a clean boolean and so checks if next_url is not null
+            hasNext={
+              data.pagination.next_url
+                ? !!data.pagination.next_url
+                : currentPage < data.pagination.total_pages
+            }
           />
         </div>
       </div>

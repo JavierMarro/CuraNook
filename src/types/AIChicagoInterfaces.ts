@@ -8,7 +8,7 @@ export interface AIChicagoAPIResponse {
     offset: number;
     total_pages: number;
     current_page: number;
-    next_url: string | null;
+    next_url?: string | null;
   };
 }
 // This interface is used for the response of the AIChicago search endpoint, which is more efficient for sorting and filtering queries
@@ -20,6 +20,7 @@ export interface AIChicagoSearchResponse<T> {
     offset: number;
     total_pages: number;
     current_page: number;
+    next_url?: string | null;
   };
   data: (T & { _score: number })[];
   info: {

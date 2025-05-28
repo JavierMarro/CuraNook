@@ -55,19 +55,13 @@ export const fetchAIChicagoArtworks = async (
       `Failed to fetch artworks: ${res.status} ${res.statusText}`
     );
   }
-  // Self-reminder: variable data checks if the response is valid and parse it with .json()
+
   const data: AIChicagoSearchResponse<AIChicagoArtwork> = await res.json();
 
   // In this return block I'm transforming the search response to match expected component interface format
   return {
     artworks: data.data, // This data does not have imageURL, because of the nature of the data structure from this API the imageUrl will be added in component
     iiif_url: data.config.iiif_url,
-    pagination: {
-      ...data.pagination,
-      next_url:
-        data.pagination.current_page < data.pagination.total_pages
-          ? `page=${data.pagination.current_page + 1}`
-          : null,
-    },
+    pagination: data.pagination,
   };
 };
