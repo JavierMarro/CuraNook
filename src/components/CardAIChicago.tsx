@@ -7,8 +7,9 @@ import type { AIChicagoArtwork } from "@/types/AIChicagoInterfaces";
 
 interface ArtworkCardProps {
   artwork: AIChicagoArtwork & { imageUrl?: string };
-} // Self-note: Getting imageUrl as a workaround to avoid modifying the original object
+} // Getting imageUrl as a workaround to avoid modifying the original object
 
+// Aceternity expandable card component
 export function CardAIChicago({ artwork }: ArtworkCardProps) {
   const [active, setActive] = useState<AIChicagoArtwork | boolean | null>(null);
   const id = useId();

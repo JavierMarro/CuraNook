@@ -49,7 +49,7 @@ function App() {
             antiquities and fine art from the Art Institute of Chicago and
             Harvard Art Museums. <br></br>Whether you are a researcher, student,
             or art enthusiast, click down below and start creating your own
-            exhibitions.
+            collections.
           </motion.h1>
           <Link
             to="/browse"
@@ -57,7 +57,7 @@ function App() {
             preload="intent"
             className="relative px-6 py-3 bg-cyan-900 text-white rounded-lg shadow-lg hover:bg-cyan-800 transition mt-6 inline-block group"
           >
-            Browse Artwork here
+            Browse Collections here
           </Link>
         </LampContainer>
       </div>

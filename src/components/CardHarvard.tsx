@@ -11,6 +11,7 @@ interface CardHarvardProps {
   artwork: HarvardListSummary;
 }
 
+// Aceternity expandable card component
 export function CardHarvard({ artwork }: CardHarvardProps) {
   const [active, setActive] = useState<HarvardListSummary | boolean | null>(
     null
