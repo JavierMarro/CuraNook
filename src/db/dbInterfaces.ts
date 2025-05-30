@@ -20,8 +20,8 @@ export interface SavedItem {
   collectionId: number;
   artworkId: string | number;
   source: "chicago" | "harvard";
-  title: string;
-  date?: string;
-  artist?: string;
   imageUrl?: string;
+  title: string;
+  artist?: string;
+  date?: string;
 }
