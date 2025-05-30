@@ -13,7 +13,7 @@
 
 ## Project description:
 
-CuraNook is an exhibition curation platform that enables users to explore virtual exhibitions from two different collections of antiquities and fine art. This platform serves researchers, students, and art enthusiasts who want to create their own collections of artwork.
+CuraNook is an exhibition curation platform that enables users to explore virtual exhibitions from two different collections of antiquities and fine art. This platform serves researchers, students, and art enthusiasts alike who want to create their own collections of artwork.
 
 **Key Features:**
 
@@ -38,16 +38,15 @@ Adding the following once integrated in project:
 To run this platform locally you will need these in the version shown or a later version:
 
 ```
-node v18.0.0 or higher
-npm 8.0.0 or higher
-pnpm (recommended)
+node v22.9.0 or higher
+pnpm 10.11.0 or higher
 ```
 
 Please follow these steps in order to run this project locally:
 
 #### - Fork and/or clone the repository
 
-Firstly, fork this repository to your own GitHub account, then using the terminal choose a directory and tweak the following command to add your username and clone the repo to the directory:
+Firstly, fork this repository to your own GitHub account and using the terminal navigate to your chosen directory, then tweak the following command to add your username and clone the repo to the directory:
 
 ```bash
 git clone https://github.com/your_username/curanook.git
@@ -67,7 +66,7 @@ npm install
 
 #### - Set up environment variables
 
-Create a new `.env` file in the root directory or rename the `.env.example` file and add your Harvard Museums API key:
+Create a new `.env` file in the root directory or rename the current `.env.example` file and add your Harvard Museums API key:
 
 ```env
 VITE_HARVARD_MUSEUMS_API_KEY=your_harvard_api_key_here
@@ -77,7 +76,7 @@ VITE_HARVARD_MUSEUMS_API_KEY=your_harvard_api_key_here
 
 #### - Running the development server
 
-Scripts that can be used in the terminal are available in the package.json. However, run the following command to get the website started:
+Scripts that can be used in the terminal are available in the package.json. Now run the following command to get the website started:
 
 ```bash
 # Using pnpm
@@ -102,7 +101,7 @@ The development server will start on `http://localhost:3000`. You can either hol
 
 **UI Components:**
 
-- **Aceternity UI** - Beautiful component library for landing page elements which also integrates Framer Motion for smooth animations and transitions
+- **Aceternity UI** - Component library which integrates Framer Motion for smooth animations and transitions
 - **Lucide React** - Icon library
 - **LottieFiles** - Loading/Error animations
 
@@ -146,6 +145,7 @@ The application follows a modern React architecture with the following structure
 src/
 ├── api/           # API integration and data fetching
 ├── components/    # API UI components
+├── db/            # Database integration
 ├── hooks/         # Custom React hooks
 ├── lib/           # Utility functions
 ├── routes/        # Page components and routing
@@ -213,8 +213,9 @@ This design supports the current dropdown museum selection while maintaining fle
 
 - [React Docs](https://react.dev/reference/react) - React 19 documentation
 - [TanStack Docs](https://tanstack.com/router/latest/docs/framework/react/overview) - Router and Query documentation
-- [TailwindCSS Docs](https://tailwindcss.com/docs) - Utility first CSS framework
 - [TypeScript Docs](https://www.typescriptlang.org/docs/) - TypeScript language reference
+- [Dexie.js Docs](https://dexie.org/docs/Dexie.js.html) - Wrapper library for IndexedDB
+- [TailwindCSS Docs](https://tailwindcss.com/docs) - Utility first CSS framework
 
 **UI Components:**
 
@@ -222,35 +223,36 @@ This design supports the current dropdown museum selection while maintaining fle
 
 **Learning Resources:**
 
-**TanStack:**
-
-- [Video - Initialising project with TS Router + Query + Tailwind](https://www.youtube.com/watch?v=10J6RyMOxN0)
-- [Video - Differences between TS Router and React Router](https://www.youtube.com/watch?v=qOwnQJOClrw)
-- [Video - Front-End Project using TanStack features](https://www.youtube.com/watch?v=Qa5AisZTtH8)
-- [Video - Fetching and displaying data with TanStack loaders](https://www.youtube.com/watch?v=FYloHKTrRnI)
-- [Video - TS Query and network requests](https://www.youtube.com/watch?v=w9r55wd2CAk)
-- [Article - Fetching Data with TS Queries](https://antematter.io/blogs/simplify-api-data-fetching-with-tanstack-queries)
-
-**TypeScript:**
-
-- [Article - Working with TypeScript interfaces](https://www.freecodecamp.org/news/how-typescript-interfaces-work/)
-- [Article - TypeScript Generics](https://medium.com/@ignatovich.dm/typescript-generics-a-simple-guide-with-practical-examples-ca3492eb821f)
-
 **API Development:**
 
 - [Harvard Museums API Toolkit](https://api-toolkit.herokuapp.com/) - Learning the Harvard API
 - [Art Institute of Chicago API Docs](https://api.artic.edu/docs/) - Complete API documentation
 
+**TanStack:**
+
+- [Video - Initialising project with TS Router + Query + Tailwind](https://www.youtube.com/watch?v=10J6RyMOxN0)
+- [Video - Differences between TS Router and React Router](https://www.youtube.com/watch?v=qOwnQJOClrw)
+- [Video - TS Query and network requests](https://www.youtube.com/watch?v=w9r55wd2CAk)
+- [Video - In-depth TS Router and Query in a project](https://www.youtube.com/watch?v=Qa5AisZTtH8)
+- [Article - Fetching Data with TS Queries](https://antematter.io/blogs/simplify-api-data-fetching-with-tanstack-queries)
+
+**TypeScript:**
+
+- [Article - A Handbook for Developers](https://www.freecodecamp.org/news/learn-typescript-with-react-handbook/)
+- [Article - TypeScript Generics](https://medium.com/@ignatovich.dm/typescript-generics-a-simple-guide-with-practical-examples-ca3492eb821f)
+
+**Dexie.js**
+
+- [Article - Implementation in ReactJS](https://cleverzone.medium.com/simplify-indexeddb-using-dexie-js-dexie-js-implementation-in-reactjs-48429c66f8ef)
+
 **Additional Resources:**
 
 - [GitHub](https://github.com/) - Version control & Forums to find solutions to issues encountered
 - [Stack Overflow](https://stackoverflow.com/questions) - Forums to find solutions to issues encountered
-- [Medium - Software Engineering](https://medium.com/?tag=software-engineering) - Web dev articles
-- [FreeCodeCamp](https://www.freecodecamp.org/news/) - Web dev tutorials
 
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are appreciated.
 
 1. Fork the Project
 2. Create your Feature branch (`git checkout -b feature/Mind-blowingFeature`)
