@@ -235,6 +235,7 @@ This design supports the current dropdown museum selection while maintaining fle
 - [Video - Differences between TS Router and React Router](https://www.youtube.com/watch?v=qOwnQJOClrw)
 - [Video - TS Query and network requests](https://www.youtube.com/watch?v=w9r55wd2CAk)
 - [Video - In-depth TS Router and Query in a project](https://www.youtube.com/watch?v=Qa5AisZTtH8)
+- [Video - TS useMutation hook](https://www.youtube.com/watch?v=33YmNXZFZIY)
 - [Article - Fetching Data with TS Queries](https://antematter.io/blogs/simplify-api-data-fetching-with-tanstack-queries)
 
 **TypeScript:**

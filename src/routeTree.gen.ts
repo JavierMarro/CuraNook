@@ -14,7 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as BrowseImport } from './routes/browse'
 import { Route as IndexImport } from './routes/index'
 import { Route as CollectionsIndexImport } from './routes/collections/index'
-import { Route as CollectionsCollectionSlugImport } from './routes/collections/collectionSlug'
+import { Route as CollectionsCollectionSlugImport } from './routes/collections/$collectionSlug'
 
 // Create/Update Routes
 
@@ -37,8 +37,8 @@ const CollectionsIndexRoute = CollectionsIndexImport.update({
 } as any)
 
 const CollectionsCollectionSlugRoute = CollectionsCollectionSlugImport.update({
-  id: '/collections/collectionSlug',
-  path: '/collections/collectionSlug',
+  id: '/collections/$collectionSlug',
+  path: '/collections/$collectionSlug',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -60,10 +60,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BrowseImport
       parentRoute: typeof rootRoute
     }
-    '/collections/collectionSlug': {
-      id: '/collections/collectionSlug'
-      path: '/collections/collectionSlug'
-      fullPath: '/collections/collectionSlug'
+    '/collections/$collectionSlug': {
+      id: '/collections/$collectionSlug'
+      path: '/collections/$collectionSlug'
+      fullPath: '/collections/$collectionSlug'
       preLoaderRoute: typeof CollectionsCollectionSlugImport
       parentRoute: typeof rootRoute
     }
@@ -82,14 +82,14 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/browse': typeof BrowseRoute
-  '/collections/collectionSlug': typeof CollectionsCollectionSlugRoute
+  '/collections/$collectionSlug': typeof CollectionsCollectionSlugRoute
   '/collections': typeof CollectionsIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/browse': typeof BrowseRoute
-  '/collections/collectionSlug': typeof CollectionsCollectionSlugRoute
+  '/collections/$collectionSlug': typeof CollectionsCollectionSlugRoute
   '/collections': typeof CollectionsIndexRoute
 }
 
@@ -97,20 +97,20 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/browse': typeof BrowseRoute
-  '/collections/collectionSlug': typeof CollectionsCollectionSlugRoute
+  '/collections/$collectionSlug': typeof CollectionsCollectionSlugRoute
   '/collections/': typeof CollectionsIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/browse' | '/collections/collectionSlug' | '/collections'
+  fullPaths: '/' | '/browse' | '/collections/$collectionSlug' | '/collections'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/browse' | '/collections/collectionSlug' | '/collections'
+  to: '/' | '/browse' | '/collections/$collectionSlug' | '/collections'
   id:
     | '__root__'
     | '/'
     | '/browse'
-    | '/collections/collectionSlug'
+    | '/collections/$collectionSlug'
     | '/collections/'
   fileRoutesById: FileRoutesById
 }
@@ -141,7 +141,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/browse",
-        "/collections/collectionSlug",
+        "/collections/$collectionSlug",
         "/collections/"
       ]
     },
@@ -151,8 +151,8 @@ export const routeTree = rootRoute
     "/browse": {
       "filePath": "browse.tsx"
     },
-    "/collections/collectionSlug": {
-      "filePath": "collections/collectionSlug.tsx"
+    "/collections/$collectionSlug": {
+      "filePath": "collections/$collectionSlug.tsx"
     },
     "/collections/": {
       "filePath": "collections/index.tsx"
