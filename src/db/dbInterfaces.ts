@@ -13,6 +13,7 @@
 export interface Collection {
   id?: number;
   title: string;
+  slug: string;
 }
 
 export interface SavedArtwork {

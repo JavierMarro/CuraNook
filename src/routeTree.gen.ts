@@ -11,17 +11,12 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as CollectionsImport } from './routes/collections'
 import { Route as BrowseImport } from './routes/browse'
 import { Route as IndexImport } from './routes/index'
+import { Route as CollectionsIndexImport } from './routes/collections/index'
+import { Route as CollectionsCollectionSlugImport } from './routes/collections/$collectionSlug'
 
 // Create/Update Routes
-
-const CollectionsRoute = CollectionsImport.update({
-  id: '/collections',
-  path: '/collections',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const BrowseRoute = BrowseImport.update({
   id: '/browse',
@@ -32,6 +27,18 @@ const BrowseRoute = BrowseImport.update({
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CollectionsIndexRoute = CollectionsIndexImport.update({
+  id: '/collections/',
+  path: '/collections/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CollectionsCollectionSlugRoute = CollectionsCollectionSlugImport.update({
+  id: '/collections/$collectionSlug',
+  path: '/collections/$collectionSlug',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -53,11 +60,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BrowseImport
       parentRoute: typeof rootRoute
     }
-    '/collections': {
-      id: '/collections'
+    '/collections/$collectionSlug': {
+      id: '/collections/$collectionSlug'
+      path: '/collections/$collectionSlug'
+      fullPath: '/collections/$collectionSlug'
+      preLoaderRoute: typeof CollectionsCollectionSlugImport
+      parentRoute: typeof rootRoute
+    }
+    '/collections/': {
+      id: '/collections/'
       path: '/collections'
       fullPath: '/collections'
-      preLoaderRoute: typeof CollectionsImport
+      preLoaderRoute: typeof CollectionsIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -68,41 +82,51 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/browse': typeof BrowseRoute
-  '/collections': typeof CollectionsRoute
+  '/collections/$collectionSlug': typeof CollectionsCollectionSlugRoute
+  '/collections': typeof CollectionsIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/browse': typeof BrowseRoute
-  '/collections': typeof CollectionsRoute
+  '/collections/$collectionSlug': typeof CollectionsCollectionSlugRoute
+  '/collections': typeof CollectionsIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/browse': typeof BrowseRoute
-  '/collections': typeof CollectionsRoute
+  '/collections/$collectionSlug': typeof CollectionsCollectionSlugRoute
+  '/collections/': typeof CollectionsIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/browse' | '/collections'
+  fullPaths: '/' | '/browse' | '/collections/$collectionSlug' | '/collections'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/browse' | '/collections'
-  id: '__root__' | '/' | '/browse' | '/collections'
+  to: '/' | '/browse' | '/collections/$collectionSlug' | '/collections'
+  id:
+    | '__root__'
+    | '/'
+    | '/browse'
+    | '/collections/$collectionSlug'
+    | '/collections/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BrowseRoute: typeof BrowseRoute
-  CollectionsRoute: typeof CollectionsRoute
+  CollectionsCollectionSlugRoute: typeof CollectionsCollectionSlugRoute
+  CollectionsIndexRoute: typeof CollectionsIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BrowseRoute: BrowseRoute,
-  CollectionsRoute: CollectionsRoute,
+  CollectionsCollectionSlugRoute: CollectionsCollectionSlugRoute,
+  CollectionsIndexRoute: CollectionsIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -117,7 +141,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/browse",
-        "/collections"
+        "/collections/$collectionSlug",
+        "/collections/"
       ]
     },
     "/": {
@@ -126,8 +151,11 @@ export const routeTree = rootRoute
     "/browse": {
       "filePath": "browse.tsx"
     },
-    "/collections": {
-      "filePath": "collections.tsx"
+    "/collections/$collectionSlug": {
+      "filePath": "collections/$collectionSlug.tsx"
+    },
+    "/collections/": {
+      "filePath": "collections/index.tsx"
     }
   }
 }
