@@ -107,15 +107,6 @@ export async function getCollectionArtworks(
   }
 }
 
-export async function getAllSavedArtworks(): Promise<SavedArtwork[]> {
-  try {
-    return await db.collectionItems.toArray();
-  } catch (error) {
-    console.error("Error fetching all saved artworks:", error);
-    throw error;
-  }
-}
-
 export async function deleteSavedArtwork(id: number) {
   try {
     return await db.transaction("rw", db.collectionItems, async () => {
