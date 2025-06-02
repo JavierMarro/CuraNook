@@ -39,7 +39,8 @@ To run this platform locally you will need these in the version shown or a later
 
 ```
 node v22.9.0 or higher
-pnpm 10.11.0 or higher
+pnpm 10.11.0 or higher (recommended)
+npm 11.2.0 or higher
 ```
 
 Please follow these steps in order to run this project locally:
@@ -243,6 +244,7 @@ This design supports the current dropdown museum selection while maintaining fle
 
 **Dexie.js**
 
+- [Article tutorial - Mastering Dexie.js, complete guide](https://app.studyraid.com/en/courses/11356/mastering-dexiejs-a-complete-guide-to-indexeddb-development)
 - [Article - Implementation in ReactJS](https://cleverzone.medium.com/simplify-indexeddb-using-dexie-js-dexie-js-implementation-in-reactjs-48429c66f8ef)
 
 **Additional Resources:**

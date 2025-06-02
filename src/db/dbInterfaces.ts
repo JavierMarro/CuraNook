@@ -15,7 +15,7 @@ export interface Collection {
   title: string;
 }
 
-export interface SavedItem {
+export interface SavedArtwork {
   id?: number;
   collectionId: number;
   artworkId: string | number;

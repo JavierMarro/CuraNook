@@ -1,23 +1,26 @@
 import Dexie, { type Table } from "dexie";
-import type { Collection, SavedItem } from "./dbInterfaces";
+import type { Collection, SavedArtwork } from "./dbInterfaces";
 import type { AIChicagoArtwork } from "@/types/AIChicagoInterfaces";
 import type { HarvardCardDetailed } from "@/types/HarvardMuseumsInterfaces";
 
-// Following https://stackblitz.com/edit/dexie-todo-list?file=models%2Fdb.ts
+// Following https://stackblitz.com/edit/dexie-todo-list?file=models%2Fdb.ts for DB schema
 export class CuraNookDB extends Dexie {
   userCollections!: Table<Collection, number>;
-  collectionItems!: Table<SavedItem, number>;
+  collectionItems!: Table<SavedArtwork, number>;
 
   constructor() {
     super("CuraNookDB");
     this.version(1).stores({
       userCollections: "++id, title",
-      collectionItems: "++id, artworkId, collectionId, source",
+      collectionItems:
+        "++id, collectionId, artworkId, source, title, artist, date, imageUrl",
     });
   }
 }
+
 export const db = new CuraNookDB();
 
+// Transaction functions to interact with DB (basically a CRUD)
 export async function createCollection(title: string) {
   try {
     const collection: Omit<Collection, "id"> = {
@@ -35,7 +38,7 @@ export async function addChicagoArtwork(
   artwork: AIChicagoArtwork & { imageUrl?: string }
 ) {
   try {
-    const itemChicago: Omit<SavedItem, "id"> = {
+    const itemChicago: Omit<SavedArtwork, "id"> = {
       collectionId,
       artworkId: artwork.id,
       source: "chicago",
@@ -56,7 +59,7 @@ export async function addHarvardArtwork(
   artwork: HarvardCardDetailed
 ) {
   try {
-    const itemHarvard: Omit<SavedItem, "id"> = {
+    const itemHarvard: Omit<SavedArtwork, "id"> = {
       collectionId,
       artworkId: artwork.objectid,
       source: "harvard",
@@ -65,6 +68,7 @@ export async function addHarvardArtwork(
       artist: artwork.artistDisplayName,
       date: artwork.dated,
     };
+    // console.log(`Harvard artwork added with id: ${artwork.objectid}`);
     return db.collectionItems.add(itemHarvard);
   } catch (error) {
     console.error("Error adding Harvard artwork:", error);
@@ -72,14 +76,76 @@ export async function addHarvardArtwork(
   }
 }
 
-// Code below from Dexie docs extra resources
-// export function deleteList(collectionListId: number) {
-//   return db.transaction("rw", db.collectionItems, db.userCollections, () => {
-//     db.collectionItems.where({ collectionId: collectionListId }).delete();
-//     db.userCollections.delete(collectionListId);
-//   });
-// }
+export async function getAllCollections(): Promise<Collection[]> {
+  try {
+    return await db.userCollections.toArray();
+  } catch (error) {
+    console.error("Error fetching collections:", error);
+    throw error;
+  }
+}
 
+export async function getCollectionById(
+  id: number
+): Promise<Collection | undefined> {
+  try {
+    return await db.userCollections.get(id);
+  } catch (error) {
+    console.error("Error fetching collection:", error);
+    throw error;
+  }
+}
+
+export async function getCollectionArtworks(
+  collectionId: number
+): Promise<SavedArtwork[]> {
+  try {
+    return await db.collectionItems.where({ collectionId }).toArray();
+  } catch (error) {
+    console.error("Error fetching collection artworks:", error);
+    throw error;
+  }
+}
+
+export async function getAllSavedArtworks(): Promise<SavedArtwork[]> {
+  try {
+    return await db.collectionItems.toArray();
+  } catch (error) {
+    console.error("Error fetching all saved artworks:", error);
+    throw error;
+  }
+}
+
+export async function deleteSavedArtwork(id: number) {
+  try {
+    return await db.transaction("rw", db.collectionItems, async () => {
+      await db.collectionItems.delete(id);
+    });
+  } catch (error) {
+    console.error("Error deleting saved artwork:", error);
+    throw error;
+  }
+}
+
+export async function deleteCollection(collectionId: number) {
+  try {
+    return await db.transaction(
+      "rw",
+      db.collectionItems,
+      db.userCollections,
+      async () => {
+        await db.collectionItems.where({ collectionId }).delete();
+        await db.userCollections.delete(collectionId);
+      }
+    );
+  } catch (error) {
+    console.error("Error deleting collection:", error);
+    throw error;
+  }
+}
+
+// Code below from Dexie docs extra resources: Resetting the database
+// This function clears all tables in the database, might implement so user has de option to clear all collections.
 // export function resetDatabase() {
 //   return db.transaction(
 //     "rw",
