@@ -15,13 +15,13 @@ export interface Collection {
   title: string;
 }
 
-export interface SavedItem {
+export interface SavedArtwork {
   id?: number;
   collectionId: number;
   artworkId: string | number;
   source: "chicago" | "harvard";
-  title: string;
-  date?: string;
-  artist?: string;
   imageUrl?: string;
+  title: string;
+  artist?: string;
+  date?: string;
 }
