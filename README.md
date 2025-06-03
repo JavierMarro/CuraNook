@@ -25,13 +25,9 @@ CuraNook is an exhibition curation platform that enables users to explore virtua
 - Error Handling: Clear error messages for failed requests or missing data
 - Responsive design that adapts to various screen sizes (tablets WIP!)
 - Accessible interface supporting screen readers and keyboard navigation
-
-<!--
-Adding the following once integrated in project:
-- Create multiple personal artwork collections
+- Guest users can create multiple personal artwork collections
 - Add and remove artworks from their collections
 - View and manage their curated exhibitions
--->
 
 ## Set up instructions:
 
@@ -53,6 +49,8 @@ Firstly, fork this repository to your own GitHub account and using the terminal 
 git clone https://github.com/your_username/curanook.git
 ```
 
+Then type the command `code .` to open the project in your source code editor.
+
 #### - Install dependencies
 
 Once the repository has been forked and cloned, run the command below at the root directory to install the required dependencies:
@@ -73,7 +71,9 @@ Create a new `.env` file in the root directory or rename the current `.env.examp
 VITE_HARVARD_MUSEUMS_API_KEY=your_harvard_api_key_here
 ```
 
-**Note:** You can obtain a free Harvard Museums API key from [Harvard Art Museums API](https://harvardartmuseums.org/collections/api). The Art Institute of Chicago API doesn't require an API key.
+**Note:** You can request a free Harvard Museums API key from [Harvard Art Museums API - Access to the API](https://harvardartmuseums.org/collections/api).
+
+The Art Institute of Chicago API doesn't require an API key.
 
 #### - Running the development server
 
@@ -87,18 +87,22 @@ pnpm dev
 npm run dev
 ```
 
-The development server will start on `http://localhost:3000`. You can either hold the Ctrl or Command button and click on the localhost link in the terminal or copy and paste the address into your browser.
+The development server will (possibly) start on `http://localhost:3000`. You can either hold the Ctrl or Command button and click on the localhost link in the terminal or copy and paste the address into your browser.
 
 ## Technologies used:
 
 **Frontend:**
 
-- **React 19** - Modern React with latest features
-- **TypeScript** - Type safe development
-- **TailwindCSS 4.0** - Utility first CSS framework
-- **TanStack Router** - Type safe routing
-- **TanStack Query** - Server state management and data fetching
-- **Vite** - Fast build tool and development server
+- **React v19.0.0** - Modern React with latest features
+- **TypeScript v5.7.2** - Type safe development
+- **TailwindCSS v4.0.6** - Utility first CSS framework
+- **TanStack Router v1.114.3** - Type safe routing
+- **TanStack Query v5.76.1** - Server state management and data fetching
+- **Vite v6.1.0** - Fast build tool and development server
+
+**Backend:**
+
+- **Dexie.js v4.0.11** - Database accessible to users via the browser
 
 **UI Components:**
 
@@ -127,9 +131,9 @@ This platform integrates with two major museum APIs to provide comprehensive acc
 - URL: https://api.artic.edu/docs/
 - No API key required
 - Features one of the world's oldest and largest art collections
-- Supports sorting by title, artist, and public domain status
+- Supports sorting by title, artist, and public domain status (amongst other fields)
 
-**Security Best Practices:**
+**Security best practices:**
 
 - API keys are stored securely in environment variables
 - Frontend uses environment variables with `VITE_` prefix for safe client-side access
@@ -154,9 +158,9 @@ src/
 └── ui/            # Base UI components
 ```
 
-### Initial wireframe and user stories
+### Wireframe and user stories
 
-![CuraNook Wireframe](https://i.imgur.com/5ZdGJWA.png "CuraNook wireframe and user stories")
+![CuraNook Wireframe](https://i.imgur.com/GQz3NHj.png "CuraNook wireframe and user stories")
 
 ### Key Components
 
@@ -166,14 +170,14 @@ src/
 
 ### Data Flow
 
-1. **Route Selection**: Users navigate to `/browse` and select a museum
-2. **Data Fetching**: TanStack Query manages API calls with caching and error handling
-3. **State Management**: React hooks manage pagination and sorting
-4. **UI Updates**: Components re-render based on data and user interactions
+1. **Route selection**: Users navigate to `/browse` and select a museum
+2. **Data fetching**: TanStack Query manages API calls with caching and error handling
+3. **State management**: React hooks manage pagination and sorting
+4. **UI updates**: Components re-render based on data and user interactions
 
-### API Data Architecture
+### API Data Architectural Decision
 
-**Data Structure Preservation:**
+**Data structure preservation**
 
 When approaching this project I had to decide whether to preserve the original APIs response structures or transform the data at the API layer. I went for preserving the original data structure for several reasons:
 
@@ -204,9 +208,9 @@ When approaching this project I had to decide whether to preserve the original A
 **Trade offs considered:**
 
 - **Current approach**: Optimal for rich data access and flexible component design
-- **Alternative (data transformation)**: Would be necessary to avoid code repetition when scaling beyond 3-4 APIs
+- **Alternative (Adapter Design Pattern)**: In my opinion, necessary to avoid code repetition when scaling beyond 3-4 APIs
 
-This design supports the current dropdown museum selection while maintaining flexibility for future features like title based search without requiring architectural changes.
+My current design supports the current dropdown museum selection while maintaining flexibility for future features like title based search without requiring architectural changes.
 
 ## Resources:
 
@@ -222,7 +226,7 @@ This design supports the current dropdown museum selection while maintaining fle
 
 - [Aceternity UI](https://ui.aceternity.com/components) - Components used: Lamp Section Header, Typewriter Effect, Navbar Menu, Expandable Cards, Lens and Tailwind CSS buttons
 
-**Learning Resources:**
+**Log of learning resources used:**
 
 **API Development:**
 
@@ -252,6 +256,14 @@ This design supports the current dropdown museum selection while maintaining fle
 
 - [GitHub](https://github.com/) - Version control & Forums to find solutions to issues encountered
 - [Stack Overflow](https://stackoverflow.com/questions) - Forums to find solutions to issues encountered
+
+## Roadmap
+
+In the nearest future, main priorities are:
+
+- Implementing a search bar so users can look up artwork by title or artist
+- Adding filters to allow browsing artwork by creation period
+- Adding authentication so users can log in, which then would enable them sharing collections more easily
 
 ## Contributing
 
