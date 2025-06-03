@@ -3,23 +3,36 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getAllCollections, addChicagoArtwork, db } from "@/db/db";
+import {
+  getAllCollections,
+  addChicagoArtwork,
+  addHarvardArtwork,
+  db,
+} from "@/db/db";
 import { toast } from "react-hot-toast";
 import type { AIChicagoArtwork } from "@/types/AIChicagoInterfaces";
+import type { HarvardCardDetailed } from "@/types/HarvardMuseumsInterfaces";
 
 interface CollectionsPopupProps {
   isOpen: boolean;
   onClose: () => void;
-  artwork: AIChicagoArtwork & { imageUrl?: string };
+  artwork: (AIChicagoArtwork & { imageUrl?: string }) | HarvardCardDetailed;
+  source: "chicago" | "harvard";
 }
 
 export function CollectionsPopup({
   isOpen,
   onClose,
   artwork,
+  source,
 }: CollectionsPopupProps) {
   const [selectedCollections, setSelectedCollections] = useState<number[]>([]);
   const queryClient = useQueryClient();
+
+  const artworkId =
+    source === "chicago"
+      ? (artwork as AIChicagoArtwork).id
+      : (artwork as HarvardCardDetailed).objectid;
 
   const { data: collections = [], isLoading } = useQuery({
     queryKey: ["collections"],
@@ -28,10 +41,10 @@ export function CollectionsPopup({
   });
 
   const { data: existingCollections = [] } = useQuery({
-    queryKey: ["existing-collections", artwork.id],
+    queryKey: ["existing-collections", artworkId, source],
     queryFn: async () => {
       const existingItems = await db.collectionItems
-        .where({ artworkId: artwork.id, source: "chicago" })
+        .where({ artworkId, source })
         .toArray();
       return existingItems.map((item) => item.collectionId);
     },
@@ -40,9 +53,19 @@ export function CollectionsPopup({
 
   const saveArtworkMutation = useMutation({
     mutationFn: async (collectionIds: number[]) => {
-      const promises = collectionIds.map((collectionId) =>
-        addChicagoArtwork(collectionId, artwork)
-      );
+      const promises = collectionIds.map((collectionId) => {
+        if (source === "chicago") {
+          return addChicagoArtwork(
+            collectionId,
+            artwork as AIChicagoArtwork & { imageUrl?: string }
+          );
+        } else {
+          return addHarvardArtwork(
+            collectionId,
+            artwork as HarvardCardDetailed
+          );
+        }
+      });
       return Promise.all(promises);
     },
     onSuccess: () => {
@@ -161,7 +184,7 @@ export function CollectionsPopup({
           </button>
           <button
             onClick={onClose}
-            className="flex-1 px-4 py-2 bg-gray-200 text-gray-800 rounded-full font-medium hover:bg-gray-300 transition-colors"
+            className="flex-1 px-4 py-2 bg-gray-200 text-gray-800 rounded-full font-medium hover:bg-slate-600 hover:text-white transition-colors"
           >
             Cancel
           </button>
