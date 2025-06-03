@@ -12,7 +12,7 @@ interface CardHarvardProps {
   artwork: HarvardListSummary;
 }
 
-// Aceternity expandable card component
+// Aceternity expandable card component + Lens used here
 export function CardHarvard({ artwork }: CardHarvardProps) {
   const [active, setActive] = useState<HarvardListSummary | boolean | null>(
     null
@@ -21,9 +21,7 @@ export function CardHarvard({ artwork }: CardHarvardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [hovering, setHovering] = useState(false);
 
-  {
-    /* Only way to fetch individual object data is by using the API's function that fetches the object by Id */
-  }
+  // Fetch detailed artwork data when the card is active
   const { data: details } = useQuery({
     queryKey: ["HarvardArtworkDetails", artwork.objectid],
     queryFn: () => fetchHarvardArtworkById(artwork.objectid),

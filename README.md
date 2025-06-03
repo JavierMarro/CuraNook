@@ -255,6 +255,7 @@ My current design supports the current dropdown museum selection while maintaini
 **Additional Resources:**
 
 - [GitHub](https://github.com/) - Version control & Forums to find solutions to issues encountered
+- [W3Schools](https://www.w3schools.com/) - For CSS styling related inspiration
 - [Stack Overflow](https://stackoverflow.com/questions) - Forums to find solutions to issues encountered
 
 ## Roadmap
@@ -265,7 +266,7 @@ In the nearest future, main priorities are:
 - Adding filters to allow browsing artwork by creation period
 - Adding authentication so users can log in, which then would enable them sharing collections more easily
 
-## Contributing
+<!-- ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are appreciated.
 
@@ -277,4 +278,4 @@ Contributions are what make the open source community such an amazing place to l
 
 ## Contact
 
-You can get in touch by opening an issue in this repo [here](https://github.com/JavierMarro/curanook/issues) and I will get back to you as soon as possible.
+You can get in touch by opening an issue in this repo [here](https://github.com/JavierMarro/curanook/issues) and I will get back to you as soon as possible. -->

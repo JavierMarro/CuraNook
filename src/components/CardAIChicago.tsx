@@ -5,14 +5,15 @@ import type { AIChicagoArtwork } from "@/types/AIChicagoInterfaces";
 import { AnimatePresence, motion } from "motion/react";
 import { Lens } from "@/ui/lens";
 import { useOutsideClick } from "@/hooks/use-outside-click";
+import { CollectionsPopup } from "./PopupSaveArtwork";
 
 interface ArtworkCardProps {
   artwork: AIChicagoArtwork & { imageUrl?: string };
-} // Getting imageUrl as a workaround to avoid modifying the original object
+}
 
-// Aceternity expandable card component
 export function CardAIChicago({ artwork }: ArtworkCardProps) {
   const [active, setActive] = useState<AIChicagoArtwork | boolean | null>(null);
+  const [showCollectionsPopup, setShowCollectionsPopup] = useState(false);
   const id = useId();
   const ref = useRef<HTMLDivElement>(null);
   const [hovering, setHovering] = useState(false);
@@ -21,6 +22,7 @@ export function CardAIChicago({ artwork }: ArtworkCardProps) {
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         setActive(false);
+        setShowCollectionsPopup(false);
       }
     }
 
@@ -37,6 +39,11 @@ export function CardAIChicago({ artwork }: ArtworkCardProps) {
   useOutsideClick(ref, () => setActive(null));
 
   const imageUrl = artwork.imageUrl || "/No_image_available-museum.svg";
+
+  const handleSaveClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setShowCollectionsPopup(true);
+  };
 
   return (
     <>
@@ -129,10 +136,12 @@ export function CardAIChicago({ artwork }: ArtworkCardProps) {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     className="px-4 py-3 text-sm rounded-full font-bold bg-cyan-200 text-black hover:bg-cyan-500 transition-colors flex-shrink-0"
+                    onClick={handleSaveClick}
                   >
                     Save to <br></br> collection
                   </motion.button>
                 </div>
+
                 <div className="flex-1 overflow-y-auto px-4 pb-4 min-h-0">
                   <motion.div
                     layout
@@ -290,15 +299,19 @@ export function CardAIChicago({ artwork }: ArtworkCardProps) {
             </div>
             <button
               className="flex-shrink-0 px-3 py-1 text-xs rounded-full font-medium bg-cyan-200 text-black hover:bg-cyan-500 transition-colors"
-              onClick={(e) => {
-                e.stopPropagation(); // Prevent card expansion when clicking the button
-              }}
+              onClick={handleSaveClick}
             >
               Save to<br></br> collection
             </button>
           </div>
         </div>
       </motion.div>
+
+      <CollectionsPopup
+        isOpen={showCollectionsPopup}
+        onClose={() => setShowCollectionsPopup(false)}
+        artwork={artwork}
+      />
     </>
   );
 }
