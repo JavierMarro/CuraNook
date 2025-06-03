@@ -7,6 +7,7 @@ import type { HarvardListSummary } from "@/types/HarvardMuseumsInterfaces";
 import { AnimatePresence, motion } from "motion/react";
 import { Lens } from "@/ui/lens";
 import { useOutsideClick } from "@/hooks/use-outside-click";
+import { CollectionsPopup } from "./PopupSaveArtwork";
 
 interface CardHarvardProps {
   artwork: HarvardListSummary;
@@ -17,6 +18,7 @@ export function CardHarvard({ artwork }: CardHarvardProps) {
   const [active, setActive] = useState<HarvardListSummary | boolean | null>(
     null
   );
+  const [showCollectionsPopup, setShowCollectionsPopup] = useState(false);
   const id = useId();
   const ref = useRef<HTMLDivElement>(null);
   const [hovering, setHovering] = useState(false);
@@ -25,7 +27,7 @@ export function CardHarvard({ artwork }: CardHarvardProps) {
   const { data: details } = useQuery({
     queryKey: ["HarvardArtworkDetails", artwork.objectid],
     queryFn: () => fetchHarvardArtworkById(artwork.objectid),
-    enabled: !!(active && typeof active === "object"),
+    enabled: !!(active && typeof active === "object") || showCollectionsPopup,
     staleTime: 1000 * 60 * 15,
   });
 
@@ -33,6 +35,7 @@ export function CardHarvard({ artwork }: CardHarvardProps) {
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         setActive(false);
+        setShowCollectionsPopup(false);
       }
     }
 
@@ -52,8 +55,12 @@ export function CardHarvard({ artwork }: CardHarvardProps) {
   const artistName =
     (artwork.people && artwork.people[0]?.name) || "Unknown Artist";
 
-  // Use details if they are available, otherwise jsut show basic artwork data
   const displayData = details || active;
+
+  const handleSaveClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setShowCollectionsPopup(true);
+  };
 
   return (
     <>
@@ -166,6 +173,7 @@ export function CardHarvard({ artwork }: CardHarvardProps) {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     className="px-4 py-3 text-sm rounded-full font-bold bg-cyan-200 text-black hover:bg-cyan-500 transition-colors flex-shrink-0"
+                    onClick={handleSaveClick}
                   >
                     Save to <br></br> collection
                   </motion.button>
@@ -334,15 +342,22 @@ export function CardHarvard({ artwork }: CardHarvardProps) {
             </div>
             <button
               className="flex-shrink-0 px-3 py-1 text-xs rounded-full font-medium bg-cyan-200 text-black hover:bg-cyan-500 transition-colors"
-              onClick={(e) => {
-                e.stopPropagation(); // Prevent card expansion when clicking the button
-              }}
+              onClick={handleSaveClick}
             >
               Save to <br></br> collection
             </button>
           </div>
         </div>
       </motion.div>
+
+      {details && (
+        <CollectionsPopup
+          isOpen={showCollectionsPopup}
+          onClose={() => setShowCollectionsPopup(false)}
+          artwork={details || artwork}
+          source="harvard"
+        />
+      )}
     </>
   );
 }

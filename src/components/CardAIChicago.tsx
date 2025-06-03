@@ -311,6 +311,7 @@ export function CardAIChicago({ artwork }: ArtworkCardProps) {
         isOpen={showCollectionsPopup}
         onClose={() => setShowCollectionsPopup(false)}
         artwork={artwork}
+        source="chicago"
       />
     </>
   );
