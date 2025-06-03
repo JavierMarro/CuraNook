@@ -1,6 +1,7 @@
 import { createCollection } from "@/db/db";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 export function CreateCollections() {
   const [collectionTitle, setCollectionTitle] = useState("");
@@ -12,9 +13,11 @@ export function CreateCollections() {
     onSuccess: () => {
       setCollectionTitle("");
       queryClient.invalidateQueries({ queryKey: ["collections"] });
+      toast.success("Collection created successfully!");
     },
     onError: (error) => {
       console.error("Failed to create collection:", error);
+      toast.error("Failed to create collection. Please try again.");
     },
   });
 
@@ -61,18 +64,6 @@ export function CreateCollections() {
               ? "Creating..."
               : "Create Collection"}
           </button>
-
-          {createCollectionMutation.isError && (
-            <div className="error-fallback text-sm">
-              Failed to create collection. Please try again.
-            </div>
-          )}
-
-          {createCollectionMutation.isSuccess && (
-            <div className="text-cyan-700 text-sm">
-              Collection created successfully!
-            </div>
-          )}
         </div>
       </div>
     </>
