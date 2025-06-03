@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
-import { useOutsideClick } from "@/hooks/use-outside-click";
 import { useQuery } from "@tanstack/react-query";
 import { fetchHarvardArtworkById } from "@/api/HarvardMuseumAPI";
 import type { HarvardListSummary } from "@/types/HarvardMuseumsInterfaces";
+import { AnimatePresence, motion } from "motion/react";
+import { Lens } from "@/ui/lens";
+import { useOutsideClick } from "@/hooks/use-outside-click";
 
 interface CardHarvardProps {
   artwork: HarvardListSummary;
@@ -18,6 +19,7 @@ export function CardHarvard({ artwork }: CardHarvardProps) {
   );
   const id = useId();
   const ref = useRef<HTMLDivElement>(null);
+  const [hovering, setHovering] = useState(false);
 
   {
     /* Only way to fetch individual object data is by using the API's function that fetches the object by Id */
@@ -85,7 +87,7 @@ export function CardHarvard({ artwork }: CardHarvardProps) {
                   duration: 0.05,
                 },
               }}
-              className="flex absolute top-2 right-2 lg:hidden items-center justify-center bg-white rounded-full h-6 w-6"
+              className="flex absolute top-2 right-2 lg:hidden items-center justify-center bg-white rounded-full h-6 w-6 z-[200]"
               onClick={() => setActive(null)}
             >
               <CloseIcon />
@@ -96,22 +98,33 @@ export function CardHarvard({ artwork }: CardHarvardProps) {
               className="w-full max-w-[600px] h-full md:h-fit md:max-h-[90%] flex flex-col bg-white sm:rounded-3xl overflow-hidden"
             >
               <motion.div layoutId={`image-${artwork.title}-${id}`}>
-                <div className="w-full h-80 lg:h-80 sm:rounded-tr-lg sm:rounded-tl-lg bg-gray-100 flex items-center justify-center">
-                  <img
-                    src={imageUrl}
-                    alt={
-                      displayData &&
-                      typeof displayData === "object" &&
-                      "title" in displayData
-                        ? displayData.title || "Artwork image"
-                        : artwork.title || "Artwork image"
-                    }
-                    className="max-w-full max-h-full object-contain"
-                    onError={(e) => {
-                      e.currentTarget.onerror = null;
-                      e.currentTarget.src = "/No_image_available-museum.svg";
+                <div className="w-full h-80 lg:h-80 sm:rounded-tr-lg sm:rounded-tl-lg bg-gray-100 flex items-center justify-center relative overflow-hidden">
+                  <div className="w-full h-full flex items-center justify-center">
+                    <Lens hovering={hovering} setHovering={setHovering}>
+                      <img
+                        src={imageUrl}
+                        alt={
+                          displayData &&
+                          typeof displayData === "object" &&
+                          "title" in displayData
+                            ? displayData.title || "Artwork image"
+                            : artwork.title || "Artwork image"
+                        }
+                        className="max-w-full max-h-full object-contain"
+                        onError={(e) => {
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src =
+                            "/No_image_available-museum.svg";
+                        }}
+                      />
+                    </Lens>
+                  </div>
+                  <motion.div
+                    animate={{
+                      filter: hovering ? "blur(2px)" : "blur(0px)",
                     }}
-                  />
+                    className="py-4 relative z-20"
+                  ></motion.div>
                 </div>
               </motion.div>
 

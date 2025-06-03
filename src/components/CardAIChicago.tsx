@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
-import { useOutsideClick } from "@/hooks/use-outside-click";
 import type { AIChicagoArtwork } from "@/types/AIChicagoInterfaces";
+import { AnimatePresence, motion } from "motion/react";
+import { Lens } from "@/ui/lens";
+import { useOutsideClick } from "@/hooks/use-outside-click";
 
 interface ArtworkCardProps {
   artwork: AIChicagoArtwork & { imageUrl?: string };
@@ -14,6 +15,7 @@ export function CardAIChicago({ artwork }: ArtworkCardProps) {
   const [active, setActive] = useState<AIChicagoArtwork | boolean | null>(null);
   const id = useId();
   const ref = useRef<HTMLDivElement>(null);
+  const [hovering, setHovering] = useState(false);
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -66,7 +68,7 @@ export function CardAIChicago({ artwork }: ArtworkCardProps) {
                   duration: 0.05,
                 },
               }}
-              className="flex absolute top-2 right-2 lg:hidden items-center justify-center bg-white rounded-full h-6 w-6"
+              className="flex absolute top-2 right-2 lg:hidden items-center justify-center bg-white rounded-full h-6 w-6 z-[200]"
               onClick={() => setActive(null)}
             >
               <CloseIcon />
@@ -77,16 +79,27 @@ export function CardAIChicago({ artwork }: ArtworkCardProps) {
               className="w-full max-w-[600px] h-full md:h-fit md:max-h-[90%] flex flex-col bg-white sm:rounded-3xl overflow-hidden"
             >
               <motion.div layoutId={`image-${artwork.title}-${id}`}>
-                <div className="w-full h-80 lg:h-80 sm:rounded-tr-lg sm:rounded-tl-lg bg-gray-100 flex items-center justify-center">
-                  <img
-                    src={imageUrl}
-                    alt={active.title || "Artwork image"}
-                    className="max-w-full max-h-full object-contain"
-                    onError={(e) => {
-                      e.currentTarget.onerror = null;
-                      e.currentTarget.src = "/No_image_available-museum.svg";
+                <div className="w-full h-80 lg:h-80 sm:rounded-tr-lg sm:rounded-tl-lg bg-gray-100 flex items-center justify-center relative overflow-hidden">
+                  <div className="w-full h-full flex items-center justify-center">
+                    <Lens hovering={hovering} setHovering={setHovering}>
+                      <img
+                        src={imageUrl}
+                        alt={active.title || "Artwork image"}
+                        className="max-w-full max-h-full object-contain"
+                        onError={(e) => {
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src =
+                            "/No_image_available-museum.svg";
+                        }}
+                      />
+                    </Lens>
+                  </div>
+                  <motion.div
+                    animate={{
+                      filter: hovering ? "blur(2px)" : "blur(0px)",
                     }}
-                  />
+                    className="py-4 relative z-20"
+                  ></motion.div>
                 </div>
               </motion.div>
 
