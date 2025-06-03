@@ -14,9 +14,9 @@ function Browse() {
 
   return (
     <>
-      <div className="relative w-full flex flex-col items-center justify-center">
+      <div className="relative w-full flex flex-col items-center justify-center ">
         <NavMenu className="top-2" />
-        {/*TODO: Add filters*/}
+        {/*TODO: Add filters and search bar*/}
         <div className="w-full flex justify-center mt-30">
           <select
             value={museum}

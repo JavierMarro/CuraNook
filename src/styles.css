@@ -221,7 +221,7 @@ body {
 }
 
 .error-fallback {
-  color: rgb(75, 85, 99);
+  color: rgb(170, 39, 39);
 }
 
 .error-title {
@@ -229,5 +229,5 @@ body {
   line-height: 2.25rem;
   font-weight: 700;
   margin-bottom: 2rem;
-  color: rgb(31, 41, 55);
+  color: rgb(170, 39, 39);
 }
