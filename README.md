@@ -8,12 +8,13 @@
 4. [API Integration](#api-integration)
 5. [Documentation](#documentation)
 6. [Resources](#resources)
-7. [Contributing](#contributing)
-8. [Contact](#contact)
+<!-- 7. [Contributing](#contributing)
+7. [Contact](#contact) -->
 
 ## Project description:
 
 CuraNook is an exhibition curation platform that enables users to explore virtual exhibitions from two different collections of antiquities and fine art. This platform serves researchers, students, and art enthusiasts alike who want to create their own collections of artwork.
+Check this site live at: [curanook.vercel.app](https://curanook.vercel.app)
 
 **Key Features:**
 
@@ -25,9 +26,10 @@ CuraNook is an exhibition curation platform that enables users to explore virtua
 - Error Handling: Clear error messages for failed requests or missing data
 - Responsive design that adapts to various screen sizes (tablets WIP!)
 - Accessible interface supporting screen readers and keyboard navigation
-- Guest users can create multiple personal artwork collections
-- Add and remove artworks from their collections
-- View and manage their curated exhibitions
+- **Guest User Collections**: Create multiple personal artwork collections without requiring account registration
+- Add and remove artworks from collections
+- View and manage curated exhibitions with persistent local storage
+- Collections work offline using IndexedDB browser storage
 
 ## Set up instructions:
 
@@ -87,7 +89,7 @@ pnpm dev
 npm run dev
 ```
 
-The development server will (possibly) start on `http://localhost:3000`. You can either hold the Ctrl or Command button and click on the localhost link in the terminal or copy and paste the address into your browser.
+The development server will start on `http://localhost:3000`. You can either hold the Ctrl or Command button and click on the localhost link in the terminal or copy and paste the address into your browser.
 
 ## Technologies used:
 
@@ -100,19 +102,22 @@ The development server will (possibly) start on `http://localhost:3000`. You can
 - **TanStack Query v5.76.1** - Server state management and data fetching
 - **Vite v6.1.0** - Fast build tool and development server
 
-**Backend:**
+**Database & Storage:**
 
-- **Dexie.js v4.0.11** - Database accessible to users via the browser
+- **Dexie.js v4.0.11** - IndexedDB wrapper for client side database storage
+- **IndexedDB** - Persistent local storage for guest user collections
 
 **UI Components:**
 
 - **Aceternity UI** - Component library which integrates Framer Motion for smooth animations and transitions
 - **Lucide React** - Icon library
 - **LottieFiles** - Loading/Error animations
+- **React Hot Toast** - User feedback notifications
 
 **Development Tools:**
 
 - **pnpm** - Fast, disk space efficient package manager
+- **Vercel** - Deployment and hosting platform
 
 ## API Integration:
 
@@ -133,12 +138,11 @@ This platform integrates with two major museum APIs to provide comprehensive acc
 - Features one of the world's oldest and largest art collections
 - Supports sorting by title, artist, and public domain status (amongst other fields)
 
-**Security best practices:**
+**Security & API usage:**
 
-- API keys are stored securely in environment variables
-- Frontend uses environment variables with `VITE_` prefix for safe client-side access
-- No sensitive data is exposed in the client bundle
-- Sanitation of API sorting queries (encodeURIComponent)
+- Both APIs provide read-only access to public artwork data
+- API keys stored in `VITE_` prefixed environment variables for Vite compatibility
+- Sanitised API sorting queries (encodeURIComponent)
 
 ## Documentation:
 
@@ -149,31 +153,18 @@ The application follows a modern React architecture with the following structure
 ```
 src/
 ├── api/           # API integration and data fetching
-├── components/    # API UI components
-├── db/            # Database integration
+├── components/    # API & Collections UI components
+├── db/            # Dexie database configuration and CRUD operations
 ├── hooks/         # Custom React hooks
 ├── lib/           # Utility functions
 ├── routes/        # Page components and routing
-├── types/         # TypeScript interfaces & types
+├── types/         # TypeScript interfaces & API types
 └── ui/            # Base UI components
 ```
 
 ### Wireframe and user stories
 
 ![CuraNook Wireframe](https://i.imgur.com/GQz3NHj.png "CuraNook wireframe and user stories")
-
-### Key Components
-
-- **`ListAIChicago` & `ListHarvard`**: Main collection browsing components
-- **`CardAIChicago` & `CardHarvard`**: Individual artwork display cards
-- **`Pagination`**: Reusable pagination component
-
-### Data Flow
-
-1. **Route selection**: Users navigate to `/browse` and select a museum
-2. **Data fetching**: TanStack Query manages API calls with caching and error handling
-3. **State management**: React hooks manage pagination and sorting
-4. **UI updates**: Components re-render based on data and user interactions
 
 ### API Data Architectural Decision
 
