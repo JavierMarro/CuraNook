@@ -1,7 +1,6 @@
 import { Footer } from "@/components/Footer";
 import { NavMenu } from "@/components/NavMenu";
 import { Outlet, createRootRoute, useLocation } from "@tanstack/react-router";
-// import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 
 export const Route = createRootRoute({
   component: () => {
@@ -15,8 +14,6 @@ export const Route = createRootRoute({
           <Outlet />
         </div>
         {showNavAndFooter && <Footer />}
-        {/* TODO: Remember to remove <TanStackRouterDevtools /> */}
-        {/* <TanStackRouterDevtools /> */}
       </div>
     );
   },

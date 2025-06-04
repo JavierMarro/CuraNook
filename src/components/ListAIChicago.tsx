@@ -20,7 +20,7 @@ export function ItemsListAIChicago() {
     queryKey: ["AIChicagoArtworksData", currentPage, sortBy, order],
     queryFn: () => fetchAIChicagoArtworks(currentPage, 15, sortBy, order),
     placeholderData: (previousData) => previousData, // Keeps previous data visible while new data loads
-    staleTime: 1000 * 60 * 15, // From (https://www.youtube.com/watch?v=w9r55wd2CAk)
+    staleTime: 1000 * 60 * 15,
     // The above avoids fresh requests (15mins). It controls how long before it's considered stale.
   });
 

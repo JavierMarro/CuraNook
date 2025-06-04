@@ -59,7 +59,8 @@ export function CollectionsList() {
               key={collection.id}
               className="p-3 border rounded-lg flex items-center justify-between"
             >
-              <h3 className="font-medium">{collection.title}</h3>
+              <h3 className="font-bold">{collection.title}</h3>
+              {/* TODO: p tag to include artworks count perhaps? */}
               <button
                 onClick={() =>
                   handleDeleteCollection(collection.id!, collection.title)

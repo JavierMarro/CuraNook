@@ -30,7 +30,7 @@ function createSlug(title: string): string {
     .trim();
 }
 
-// Transaction functions to interact with DB (basically a CRUD)
+// Transaction functions to interact with DB (CRUD)
 export async function createCollection(title: string) {
   try {
     const slug = createSlug(title);
@@ -122,7 +122,6 @@ export async function addHarvardArtwork(
       artist: artwork.artistDisplayName,
       date: artwork.dated,
     };
-    // console.log(`Harvard artwork added with id: ${artwork.objectid}`);
     return db.collectionItems.add(itemHarvard);
   } catch (error) {
     console.error("Error adding Harvard artwork:", error);

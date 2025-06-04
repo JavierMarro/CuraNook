@@ -1,3 +1,34 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+
+# Blocking development/build files
+Disallow: /src/
+Disallow: /dist/
+Disallow: /node_modules/
+
+# Blocking configuration files
+Disallow: /*.json$
+Disallow: /*.ts$
+Disallow: /*.tsx$
+Disallow: /*.css$
+Disallow: /*.js$
+Disallow: /.env*
+Disallow: /vite.config.js
+Disallow: /tsconfig.json
+Disallow: /package.json
+Disallow: /pnpm-lock.yaml
+
+# Blocking IDE/editor files
+Disallow: /.vscode/
+Disallow: /.idea/
+
+# Blocking database files (just in case)
+Disallow: /db/
+
+# Blocking temporary files
+Disallow: /temp/
+Disallow: /tmp/
+Disallow: /*.log$
+
+# Blocking image assets
+Disallow: /No_image_available-museum.svg
