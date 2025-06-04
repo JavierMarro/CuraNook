@@ -1,5 +1,3 @@
-// Link to API docs accessing API data: https://api-toolkit.herokuapp.com/6
-
 import type {
   HarvardApiResponse,
   HarvardListSummary,

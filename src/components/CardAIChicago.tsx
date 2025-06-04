@@ -11,6 +11,7 @@ interface ArtworkCardProps {
   artwork: AIChicagoArtwork & { imageUrl?: string };
 }
 
+// Aceternity expandable card component + Lens used here
 export function CardAIChicago({ artwork }: ArtworkCardProps) {
   const [active, setActive] = useState<AIChicagoArtwork | boolean | null>(null);
   const [showCollectionsPopup, setShowCollectionsPopup] = useState(false);

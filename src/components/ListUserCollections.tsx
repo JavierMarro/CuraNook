@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Loading } from "@/ui/Loading";
 import { Trash2 } from "lucide-react";
 import { toast } from "react-hot-toast";
+import { Link } from "@tanstack/react-router";
 
 export function CollectionsList() {
   const queryClient = useQueryClient();
@@ -59,7 +60,14 @@ export function CollectionsList() {
               key={collection.id}
               className="p-3 border rounded-lg flex items-center justify-between"
             >
-              <h3 className="font-medium">{collection.title}</h3>
+              <Link
+                to="/collections/$collectionSlug"
+                params={{ collectionSlug: collection.slug }}
+                className="font-bold text-blue-600 hover:text-blue-800 hover:underline flex-1"
+              >
+                {collection.title}
+              </Link>
+              {/* TODO: p tag to include artworks count perhaps? */}
               <button
                 onClick={() =>
                   handleDeleteCollection(collection.id!, collection.title)
