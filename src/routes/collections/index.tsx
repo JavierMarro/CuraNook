@@ -12,7 +12,7 @@ function Collections() {
     <>
       <ToasterComponent />
       <div className="relative w-full flex flex-col items-center justify-center">
-        <div className="w-full flex justify-center mt-30">
+        <div className="w-full flex justify-center mt-25">
           <h1 className="text-2xl font-bold">My Collections</h1>
         </div>
         <CreateCollections />

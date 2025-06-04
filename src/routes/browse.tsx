@@ -16,7 +16,7 @@ function Browse() {
       <div className="relative w-full flex flex-col items-center justify-center ">
         <ToasterComponent />
         {/*TODO: Add filters and search bar*/}
-        <div className="w-full flex justify-center mt-30">
+        <div className="w-full flex justify-center mt-25">
           <select
             value={museum}
             onChange={(e) => setMuseum(e.target.value)}
