@@ -1,8 +1,8 @@
 import { ItemsListAIChicago } from "@/components/ListAIChicago";
 import { ItemsListHarvard } from "@/components/ListHarvard";
+import { ToasterComponent } from "@/ui/ToasterComponent";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Toaster } from "react-hot-toast";
 
 export const Route = createFileRoute("/browse")({
   component: Browse,
@@ -14,16 +14,7 @@ function Browse() {
   return (
     <>
       <div className="relative w-full flex flex-col items-center justify-center ">
-        <Toaster
-          position="top-right"
-          toastOptions={{
-            duration: 3000,
-            style: {
-              background: "#363636",
-              color: "#fff",
-            },
-          }}
-        />
+        <ToasterComponent />
         {/*TODO: Add filters and search bar*/}
         <div className="w-full flex justify-center mt-30">
           <select
