@@ -8,8 +8,9 @@
 4. [API Integration](#api-integration)
 5. [Documentation](#documentation)
 6. [Resources](#resources)
-<!-- 7. [Contributing](#contributing)
-7. [Contact](#contact) -->
+7. [Roadmap](#roadmap)
+<!-- 8. [Contributing](#contributing)
+8. [Contact](#contact) -->
 
 ## Project description:
 
