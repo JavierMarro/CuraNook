@@ -63,7 +63,7 @@ export const LampContainer = ({
           <div className="absolute  w-40 h-[100%] right-0 bottom-0 z-20 [mask-image:linear-gradient(to_left,white,transparent)]" />
           <div className="absolute  w-[100%] right-0 h-40 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]" />
         </motion.div>
-        <div className="absolute top-1/2 h-48 w-full translate-y-12 scale-x-150 bg-slate-100 blur-2xl"></div>
+        <div className="absolute top-1/2 h-48 w-full translate-y-12 scale-x-150 blur-2xl"></div>
         <div className="absolute top-1/2 z-50 h-48 w-full bg-transparent opacity-10 backdrop-blur-md"></div>
         <div className="absolute inset-auto z-50 h-36 w-[38rem] -translate-y-20 sm:-translate-y-[0rem] md:-translate-y-[0rem] lg:-translate-y-[0rem] xl:-translate-y-[2rem] rounded-full bg-cyan-500 opacity-70 blur-3xl"></div>
         <motion.div
@@ -88,10 +88,10 @@ export const LampContainer = ({
   "
         ></motion.div>
 
-        <div className="absolute inset-auto z-40 h-60 w-full -translate-y-[19.5rem] bg-slate-100 "></div>
+        <div className="absolute inset-auto z-40 h-60 w-full -translate-y-[19.5rem] "></div>
       </div>
 
-      <div className="relative z-50 flex -translate-y-45 sm:-translate-y-20 md:-translate-y-20 xl:-translate-y-25 2xl:-translate-y-45 flex-col items-center px-5">
+      <div className="relative z-50 flex -translate-y-32 sm:-translate-y-20 md:-translate-y-20 lg:-translate-y-20 xl:-translate-y-25 2xl:-translate-y-45 flex-col items-center px-5">
         {children}
       </div>
     </div>

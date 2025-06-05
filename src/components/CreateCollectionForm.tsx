@@ -49,7 +49,7 @@ export function CreateCollections() {
             value={collectionTitle}
             onChange={(e) => setCollectionTitle(e.target.value)}
             onKeyDown={handleKeyPress}
-            placeholder="Enter your new collection's name here!"
+            placeholder="Enter your new collection's name here"
             className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-3 focus:ring-cyan-500 focus:border-transparent"
             disabled={createCollectionMutation.isPending}
           />

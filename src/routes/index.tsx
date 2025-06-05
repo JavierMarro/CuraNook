@@ -18,15 +18,15 @@ function App() {
   const words: Words[] = [
     {
       text: "Welcome",
-      className: "text-black dark:text-black ",
+      className: "text-black",
     },
     {
       text: "to",
-      className: "text-black dark:text-black ",
+      className: "text-black",
     },
     {
       text: "CuraNook",
-      className: "text-cyan-900 dark:text-cyan-900 ",
+      className: "text-cyan-900",
     },
   ];
 
