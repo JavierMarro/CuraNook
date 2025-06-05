@@ -20,7 +20,7 @@ export function ItemsListHarvard() {
     queryKey: ["HarvardArtworksData", currentPage, sortBy, order],
     queryFn: () => fetchHarvardArtworks(currentPage, 15, sortBy, order),
     placeholderData: (previousData) => previousData,
-    staleTime: 1000 * 60 * 15,
+    staleTime: 1000 * 60 * 5,
   });
 
   useEffect(() => {
@@ -92,7 +92,6 @@ export function ItemsListHarvard() {
             totalPages={data.info.pages}
             onPrev={() => setCurrentPage((page) => Math.max(1, page - 1))}
             onNext={() => setCurrentPage((page) => page + 1)}
-            onPageChange={(page) => setCurrentPage(page)}
             hasNext={!!data.info.next}
           />
         </div>

@@ -20,8 +20,8 @@ export function ItemsListAIChicago() {
     queryKey: ["AIChicagoArtworksData", currentPage, sortBy, order],
     queryFn: () => fetchAIChicagoArtworks(currentPage, 15, sortBy, order),
     placeholderData: (previousData) => previousData, // Keeps previous data visible while new data loads
-    staleTime: 1000 * 60 * 15,
-    // The above avoids fresh requests (15mins). It controls how long before it's considered stale.
+    staleTime: 1000 * 60 * 5,
+    // The above avoids fresh requests (5mins). It controls how long before it's considered stale.
   });
 
   useEffect(() => {
@@ -85,7 +85,6 @@ export function ItemsListAIChicago() {
             totalPages={data.pagination.total_pages}
             onPrev={() => setCurrentPage((page) => Math.max(1, page - 1))}
             onNext={() => setCurrentPage((page) => page + 1)}
-            onPageChange={(page) => setCurrentPage(page)}
             hasNext={
               data.pagination.next_url
                 ? !!data.pagination.next_url
