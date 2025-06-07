@@ -15,7 +15,7 @@
 ## Project description:
 
 CuraNook is an exhibition curation platform that enables users to explore virtual exhibitions from two different collections of antiquities and fine art. This platform serves researchers, students, and art enthusiasts alike who want to create their own collections of artwork.
-Check this site live at: [curanook.vercel.app](https://curanook.vercel.app)
+Check this site live at: [curanook.art](https://www.curanook.art)
 
 **Key Features:**
 
@@ -209,7 +209,7 @@ My current design supports the current dropdown museum selection while maintaini
 **Official Documentation:**
 
 - [React Docs](https://react.dev/reference/react) - React 19 documentation
-- [TanStack Docs](https://tanstack.com/router/latest/docs/framework/react/overview) - Router and Query documentation
+- [TanStack Docs](https://tanstack.com/) - Router and Query documentation
 - [TypeScript Docs](https://www.typescriptlang.org/docs/) - TypeScript language reference
 - [Dexie.js Docs](https://dexie.org/docs/Dexie.js.html) - Wrapper library for IndexedDB
 - [TailwindCSS Docs](https://tailwindcss.com/docs) - Utility first CSS framework
@@ -254,7 +254,6 @@ My current design supports the current dropdown museum selection while maintaini
 
 In the nearest future, main priorities are:
 
-- Implementing a search bar so users can look up artwork by title or artist
 - Adding filters to allow browsing artwork by creation period
 - Adding authentication so users can log in, which then would enable them sharing collections more easily
 
