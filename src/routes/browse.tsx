@@ -16,11 +16,11 @@ function Browse() {
       <div className="relative w-full flex flex-col items-center justify-center ">
         <ToasterComponent />
         {/*TODO: Add filters and search bar*/}
-        <div className="w-full flex justify-center mt-25">
+        <div className="w-full flex justify-center mt-25 px-4">
           <select
             value={museum}
             onChange={(e) => setMuseum(e.target.value)}
-            className="p-2 border rounded"
+            className="p-2 border rounded w-full max-w-xs"
             aria-label="Select a museum"
           >
             <option value="aichicago">Art Institute of Chicago</option>

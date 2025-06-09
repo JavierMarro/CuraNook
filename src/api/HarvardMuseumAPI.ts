@@ -21,7 +21,8 @@ export const fetchHarvardArtworks = async (
   page = 1,
   size = 15,
   sortBy: ValidSortByHarvard = "rank",
-  order: ValidOrder = "asc"
+  order: ValidOrder = "asc",
+  searchQuery = ""
 ): Promise<{
   artworks: HarvardListSummary[];
   info: HarvardApiResponse<HarvardListSummary>["info"];
@@ -32,9 +33,15 @@ export const fetchHarvardArtworks = async (
       sortBy
     )}&sortorder=${encodeURIComponent(order)}`;
   }
+
+  let searchInput = "";
+  if (searchQuery.trim()) {
+    searchInput = `&keyword=${encodeURIComponent(searchQuery.trim())}`;
+  }
+
   const baseUrl = `https://api.harvardartmuseums.org/object?fields=${encodeURIComponent(
     HarvardListFields
-  )}${sortingValues}&hasimage=1&apikey=${HARVARD_KEY}&size=${size}&page=${page}`; // make sure to display artwork with at least one image
+  )}${sortingValues}${searchInput}&hasimage=1&apikey=${HARVARD_KEY}&size=${size}&page=${page}`; // make sure to display artwork with at least one image
   const res = await fetch(baseUrl);
 
   if (!res.ok) {
@@ -45,13 +52,14 @@ export const fetchHarvardArtworks = async (
 
   const data: HarvardApiResponse<HarvardListSummary> = await res.json();
 
-  // Filter out items without primary images as a safeguard
-  const filteredRecords = data.records.filter(
-    (record) => record.primaryimageurl
-  );
+  // This API contains quite a few results with no images so fallback image used in case the hasimage=1 in the URL doesn't filter as expected
+  const recordsWithFallbackImage = data.records.map((record) => ({
+    ...record,
+    primaryimageurl: record.primaryimageurl || "/No_image_available-museum.svg",
+  }));
 
   return {
-    artworks: filteredRecords,
+    artworks: recordsWithFallbackImage,
     info: data.info,
   };
 };

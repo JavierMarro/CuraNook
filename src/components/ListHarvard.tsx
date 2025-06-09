@@ -10,22 +10,36 @@ import { Pagination } from "./Pagination";
 import { Loading } from "@/ui/Loading";
 import { Error } from "@/ui/Error";
 import type { ValidOrder } from "@/types/AIChicagoInterfaces";
+import { Search, X, Loader } from "lucide-react";
 
 export function ItemsListHarvard() {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState<ValidSortByHarvard>("rank");
   const [order, setOrder] = useState<ValidOrder>("asc");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchInput, setSearchInput] = useState("");
 
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["HarvardArtworksData", currentPage, sortBy, order],
-    queryFn: () => fetchHarvardArtworks(currentPage, 15, sortBy, order),
+    queryKey: ["HarvardArtworksData", currentPage, sortBy, order, searchQuery],
+    queryFn: () =>
+      fetchHarvardArtworks(currentPage, 15, sortBy, order, searchQuery),
     placeholderData: (previousData) => previousData,
     staleTime: 1000 * 60 * 5,
   });
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [sortBy, order]);
+  }, [sortBy, order, searchQuery]);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSearchQuery(searchInput);
+  };
+
+  const clearSearch = () => {
+    setSearchInput("");
+    setSearchQuery("");
+  };
 
   if (isLoading) return <Loading />;
   if (isError) {
@@ -50,34 +64,64 @@ export function ItemsListHarvard() {
     <div className="museum-container">
       <h2 className="museum-title">Harvard Art Museums Collection</h2>
       <div className="museum-controls">
-        <div className="control-group">
-          <label htmlFor="sort-by" className="control-label">
-            Sort by:
+        <div className="control-group search-group">
+          <label htmlFor="search" className="control-label">
+            Search:
           </label>
-          <select
-            id="sort-by"
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as ValidSortByHarvard)}
-            className="control-select"
-          >
-            <option value="rank">Popularity</option>
-            <option value="accessionyear">Accession Year</option>
-            <option value="lastupdate">Recently Updated</option>
-          </select>
+          <form onSubmit={handleSearch} className="search-form">
+            <div className="search-container">
+              <Search className="search-icon" size={16} />
+              <input
+                id="search"
+                type="text"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                placeholder="Search by title or artist..."
+                className="search-input"
+              />
+              {isLoading && <Loader className="search-loader" size={16} />}
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={clearSearch}
+                  className="clear-button"
+                >
+                  <X size={16} />
+                </button>
+              )}
+            </div>
+          </form>
         </div>
-        <div className="control-group">
-          <label htmlFor="sort-order" className="control-label">
-            Order:
-          </label>
-          <select
-            id="sort-order"
-            value={order}
-            onChange={(e) => setOrder(e.target.value as ValidOrder)}
-            className="control-select"
-          >
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-          </select>
+        <div className="controls-row">
+          <div className="control-group">
+            <label htmlFor="sort-by" className="control-label">
+              Sort by:
+            </label>
+            <select
+              id="sort-by"
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value as ValidSortByHarvard)}
+              className="control-select"
+            >
+              <option value="rank">Popularity</option>
+              <option value="accessionyear">Accession Year</option>
+              <option value="lastupdate">Recently Updated</option>
+            </select>
+          </div>
+          <div className="control-group">
+            <label htmlFor="sort-order" className="control-label">
+              Order:
+            </label>
+            <select
+              id="sort-order"
+              value={order}
+              onChange={(e) => setOrder(e.target.value as ValidOrder)}
+              className="control-select"
+            >
+              <option value="asc">Ascending</option>
+              <option value="desc">Descending</option>
+            </select>
+          </div>
         </div>
       </div>
       <div className="artworks-grid-harvard">
