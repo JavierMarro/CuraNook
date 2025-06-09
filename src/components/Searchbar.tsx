@@ -27,7 +27,7 @@ export function SearchBar({
   };
 
   return (
-    <div className="control-group search-group">
+    <>
       <label htmlFor="search" className="control-label">
         Search:
       </label>
@@ -54,6 +54,6 @@ export function SearchBar({
           )}
         </div>
       </form>
-    </div>
+    </>
   );
 }
