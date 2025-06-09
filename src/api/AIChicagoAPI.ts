@@ -31,7 +31,6 @@ const AIChicagoFields = [
 // From API docs the following object will work as an interpreter between user selection and API accessing fields (.keyword)
 export const apiSortAIChicagoFields: Record<ValidSortByChicago, string> = {
   title: "title.keyword",
-  artist_title: "artist_title.keyword",
   is_public_domain: "is_public_domain",
 };
 
@@ -39,7 +38,8 @@ export const fetchAIChicagoArtworks = async (
   page = 1,
   limit = 15,
   sortBy: ValidSortByChicago = "title",
-  order: ValidOrder = "asc"
+  order: ValidOrder = "asc",
+  searchQuery = ""
 ): Promise<AIChicagoAPIResponse> => {
   let sortingValues = "";
   if (sortBy && apiSortAIChicagoFields[sortBy]) {
@@ -48,10 +48,15 @@ export const fetchAIChicagoArtworks = async (
       apiSortField
     )}]=${encodeURIComponent(order)}`;
   }
-  // Initially /artworks endpoint used but according to the Art Institute of Chicago API docs, sorting only works well with search endpoint
-  const baseUrl = `https://api.artic.edu/api/v1/artworks/search?query=*&fields=${encodeURIComponent(
+
+  // I thought the wildcard search was * but that kept returning no results, an empty string was the answer!
+  const query = searchQuery.trim() ? encodeURIComponent(searchQuery) : "";
+
+  // Use search endpoint for both browsing and searching to ensure consistent sorting
+  const baseUrl = `https://api.artic.edu/api/v1/artworks/search?q=${query}&fields=${encodeURIComponent(
     AIChicagoFields
   )}${sortingValues}&page=${page}&limit=${limit}`;
+
   const res = await fetch(baseUrl);
 
   if (!res.ok) {
@@ -60,10 +65,10 @@ export const fetchAIChicagoArtworks = async (
     );
   }
 
-  const data: AIChicagoSearchResponse<AIChicagoArtwork> = await res.json();
+  const data = (await res.json()) as AIChicagoSearchResponse<AIChicagoArtwork>;
 
   return {
-    artworks: data.data, // This data does not have imageURL, because of the nature of the data structure from this API the imageUrl will be added in component
+    artworks: data.data,
     iiif_url: data.config.iiif_url,
     pagination: data.pagination,
   };

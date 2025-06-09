@@ -35,7 +35,7 @@ export interface AIChicagoSearchResponse<T> {
 }
 
 // types for sortBy and Order to increase sanitation of queries
-export type ValidSortByChicago = "title" | "artist_title" | "is_public_domain";
+export type ValidSortByChicago = "title" | "is_public_domain";
 // Decided to reuse the type below for order validation for Harvard's API too
 export type ValidOrder = "asc" | "desc";
 

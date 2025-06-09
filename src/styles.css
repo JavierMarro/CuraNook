@@ -131,6 +131,8 @@ body {
   padding-left: 1rem;
   padding-right: 1rem;
   padding-top: 1.25rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .museum-title {
@@ -144,15 +146,60 @@ body {
 
 .museum-controls {
   display: flex;
+  flex-direction: column;
   gap: 1rem;
   margin-bottom: 1rem;
-  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .museum-controls {
+    flex-direction: row;
+    justify-content: center;
+  }
 }
 
 .control-group {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  width: 100%;
+  max-width: 250px;
+}
+
+.control-group.search-group {
+  order: -1;
+}
+
+.controls-row {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.controls-row .control-group {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .control-group {
+    width: auto;
+    max-width: none;
+  }
+
+  .control-group.search-group {
+    order: 0;
+  }
+
+  .controls-row {
+    display: contents;
+  }
+
+  .controls-row .control-group {
+    flex: none;
+  }
 }
 
 .control-label {
@@ -167,6 +214,71 @@ body {
   border: 1px solid rgb(209, 213, 219);
   border-radius: 0.25rem;
   background-color: white;
+  width: 100%;
+}
+
+.search-form {
+  position: relative;
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  padding: 0.5rem 2.5rem 0.5rem 2rem;
+  border: 1px solid rgb(209, 213, 219);
+  border-radius: 0.25rem;
+  background-color: white;
+  width: 100%;
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .search-input {
+    min-width: 200px;
+    width: auto;
+  }
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.5rem;
+  color: rgb(107, 114, 128);
+  pointer-events: none;
+}
+
+.search-loader {
+  position: absolute;
+  right: 2.5rem;
+  color: rgb(107, 114, 128);
+  animation: spin 1s linear infinite;
+}
+
+.clear-button {
+  position: absolute;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  color: rgb(107, 114, 128);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 0.125rem;
+}
+
+.clear-button:hover {
+  background-color: rgb(243, 244, 246);
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .artworks-grid {
