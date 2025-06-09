@@ -10,13 +10,14 @@ import { Pagination } from "./Pagination";
 import { Loading } from "@/ui/Loading";
 import { Error } from "@/ui/Error";
 import type { ValidOrder } from "@/types/AIChicagoInterfaces";
-import { SearchBar } from "./SearchBar";
+import { Search, X, Loader } from "lucide-react";
 
 export function ItemsListHarvard() {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState<ValidSortByHarvard>("rank");
   const [order, setOrder] = useState<ValidOrder>("asc");
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchInput, setSearchInput] = useState("");
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["HarvardArtworksData", currentPage, sortBy, order, searchQuery],
@@ -29,6 +30,16 @@ export function ItemsListHarvard() {
   useEffect(() => {
     setCurrentPage(1);
   }, [sortBy, order, searchQuery]);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSearchQuery(searchInput);
+  };
+
+  const clearSearch = () => {
+    setSearchInput("");
+    setSearchQuery("");
+  };
 
   if (isLoading) return <Loading />;
   if (isError) {
@@ -54,11 +65,32 @@ export function ItemsListHarvard() {
       <h2 className="museum-title">Harvard Art Museums Collection</h2>
       <div className="museum-controls">
         <div className="control-group search-group">
-          <SearchBar
-            searchQuery={searchQuery}
-            onSearchChange={setSearchQuery}
-            isLoading={isLoading}
-          />
+          <label htmlFor="search" className="control-label">
+            Search:
+          </label>
+          <form onSubmit={handleSearch} className="search-form">
+            <div className="search-container">
+              <Search className="search-icon" size={16} />
+              <input
+                id="search"
+                type="text"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                placeholder="Search by title or artist..."
+                className="search-input"
+              />
+              {isLoading && <Loader className="search-loader" size={16} />}
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={clearSearch}
+                  className="clear-button"
+                >
+                  <X size={16} />
+                </button>
+              )}
+            </div>
+          </form>
         </div>
         <div className="controls-row">
           <div className="control-group">
