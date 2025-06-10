@@ -42,6 +42,7 @@ export const fetchAIChicagoArtworks = async (
   searchQuery = ""
 ): Promise<AIChicagoAPIResponse> => {
   let sortingValues = "";
+
   if (sortBy && apiSortAIChicagoFields[sortBy]) {
     const apiSortField = apiSortAIChicagoFields[sortBy];
     sortingValues = `&sort[${encodeURIComponent(
