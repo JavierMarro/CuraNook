@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchAIChicagoArtworks } from "@/api/AIChicagoAPI";
 import { CardAIChicago } from "./CardAIChicago";
+import { SearchComponent } from "./SearchBar";
 import type {
   ValidSortByChicago,
   ValidOrder,
@@ -10,7 +11,6 @@ import type {
 import { Pagination } from "./Pagination";
 import { Loading } from "@/ui/Loading";
 import { Error } from "@/ui/Error";
-import { Search, X, Loader } from "lucide-react";
 
 export function ItemsListAIChicago() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -55,34 +55,13 @@ export function ItemsListAIChicago() {
     <div className="museum-container">
       <h2 className="museum-title">Art Institute of Chicago Collection</h2>
       <div className="museum-controls">
-        <div className="control-group search-group">
-          <label htmlFor="search" className="control-label">
-            Search:
-          </label>
-          <form onSubmit={handleSearch} className="search-form">
-            <div className="search-container">
-              <Search className="search-icon" size={16} />
-              <input
-                id="search"
-                type="text"
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-                placeholder="Search by title or artist..."
-                className="search-input"
-              />
-              {isLoading && <Loader className="search-loader" size={16} />}
-              {searchQuery && (
-                <button
-                  type="button"
-                  onClick={clearSearch}
-                  className="clear-button"
-                >
-                  <X size={16} />
-                </button>
-              )}
-            </div>
-          </form>
-        </div>
+        <SearchComponent
+          searchInput={searchInput}
+          onSearchInputChange={setSearchInput}
+          onSearch={handleSearch}
+          onClearSearch={clearSearch}
+          hasActiveSearch={!!searchQuery}
+        />
         <div className="controls-row">
           <div className="control-group">
             <label htmlFor="sort-by" className="control-label">

@@ -28,6 +28,7 @@ export const fetchHarvardArtworks = async (
   info: HarvardApiResponse<HarvardListSummary>["info"];
 }> => {
   let sortingValues = "";
+
   if (sortBy) {
     sortingValues = `&sort=${encodeURIComponent(
       sortBy

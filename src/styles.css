@@ -250,13 +250,6 @@ body {
   pointer-events: none;
 }
 
-.search-loader {
-  position: absolute;
-  right: 2.5rem;
-  color: rgb(107, 114, 128);
-  animation: spin 1s linear infinite;
-}
-
 .clear-button {
   position: absolute;
   right: 0.5rem;
@@ -270,15 +263,6 @@ body {
 
 .clear-button:hover {
   background-color: rgb(243, 244, 246);
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 .artworks-grid {
