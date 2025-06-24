@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Link } from "@tanstack/react-router";
 import {
   getAllCollections,
   addChicagoArtwork,
@@ -122,7 +123,15 @@ export function CollectionsPopup({
           <div className="text-center py-4">
             <p className="text-gray-600 mb-4">No collections found :(</p>
             <p className="text-sm text-gray-500">
-              Create a collection to start saving artworks!
+              Create a collection{" "}
+              <Link
+                to="/collections"
+                className="text-cyan-600 hover:text-cyan-800 underline"
+                onClick={onClose}
+              >
+                here
+              </Link>{" "}
+              to start saving artworks!
             </p>
           </div>
         ) : availableCollections.length === 0 ? (
@@ -130,7 +139,17 @@ export function CollectionsPopup({
             <p className="text-gray-600 mb-4">
               This artwork is already saved in all your collections.
             </p>
-            <p className="text-sm text-gray-500">Create a new collection!</p>
+            <p className="text-sm text-gray-500">
+              Create a new collection{" "}
+              <Link
+                to="/collections"
+                className="text-cyan-600 hover:text-cyan-800 underline"
+                onClick={onClose}
+              >
+                here
+              </Link>
+              !
+            </p>
           </div>
         ) : (
           <div className="space-y-2 mb-6">
