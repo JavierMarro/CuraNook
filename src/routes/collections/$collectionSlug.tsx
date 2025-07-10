@@ -104,8 +104,10 @@ function CollectionDetailed() {
             {collection.title}
           </h1>
           <p className="text-slate-700">
-            Number of items in this collection: {artworks.length}{" "}
-            {artworks.length === 1 ? "artwork" : "artworks"}
+            Number of items: {artworks.length}{" "}
+            {artworks.length === 1
+              ? "artwork in this collection"
+              : "artworks in this collection"}
           </p>
         </div>
 
