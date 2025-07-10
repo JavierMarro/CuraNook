@@ -92,8 +92,8 @@ function CollectionDetailed() {
   return (
     <>
       <ToasterComponent />
-      <div className="museum-container mt-20">
-        <div className="mb-8">
+      <div className="museum-container mt-20 md:ml-10 lg:ml-20 xl:ml-40 2xl:ml-60">
+        <div className="mb-8 ml-5">
           <Link
             to="/collections"
             className="text-slate-800 hover:text-black font-medium hover:font-bold  mb-4 inline-block"
