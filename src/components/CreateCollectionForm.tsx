@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 
 export function CreateCollections() {
   const [collectionTitle, setCollectionTitle] = useState("");
-  const validTitleRgx = /^[\w\s.,'-]*$/;
+  const validTitleRgx = /^[\w\s.,'\u2019-]*$/; // Allows letters, numbers, spaces, and basic punctuation
   const queryClient = useQueryClient();
 
   const createCollectionMutation = useMutation({
@@ -28,6 +28,9 @@ export function CreateCollections() {
     if (!validTitleRgx.test(trimmedTitle)) {
       console.error(
         "Invalid characters in collection title, use letters, spaces, and basic punctuation only."
+      );
+      toast.error(
+        "Invalid characters in title, use letters, spaces, and basic punctuation only."
       );
       return;
     }

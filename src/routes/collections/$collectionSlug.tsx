@@ -92,8 +92,8 @@ function CollectionDetailed() {
   return (
     <>
       <ToasterComponent />
-      <div className="museum-container mt-20">
-        <div className="mb-8">
+      <div className="museum-container mt-20 md:ml-10 lg:ml-20 xl:ml-40 2xl:ml-60">
+        <div className="mb-8 ml-5">
           <Link
             to="/collections"
             className="text-slate-800 hover:text-black font-medium hover:font-bold  mb-4 inline-block"
@@ -104,8 +104,10 @@ function CollectionDetailed() {
             {collection.title}
           </h1>
           <p className="text-slate-700">
-            Number of items in this collection: {artworks.length}{" "}
-            {artworks.length === 1 ? "artwork" : "artworks"}
+            Number of items: {artworks.length}{" "}
+            {artworks.length === 1
+              ? "artwork in this collection"
+              : "artworks in this collection"}
           </p>
         </div>
 
