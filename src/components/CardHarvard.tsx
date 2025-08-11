@@ -134,23 +134,23 @@ export function CardHarvard({ artwork }: CardHarvardProps) {
               </motion.div>
 
               <div className="flex flex-col flex-1 min-h-0">
-                <div className="flex justify-between items-start p-4 flex-shrink-0">
-                  <div className="flex-1 min-w-0 pr-4">
-                    <motion.h3
-                      layoutId={`title-${artwork.title}-${id}`}
-                      className="font-semibold text-black text-lg mb-2 break-words"
-                    >
-                      {displayData &&
-                      typeof displayData === "object" &&
-                      "title" in displayData
-                        ? displayData.title ||
-                          artwork.title ||
-                          "Untitled art piece"
-                        : artwork.title || "Untitled art piece"}
-                    </motion.h3>
+                <div className="p-4 flex-shrink-0">
+                  <motion.h3
+                    layoutId={`title-${artwork.title}-${id}`}
+                    className="font-semibold text-black text-lg mb-2 break-words"
+                  >
+                    {displayData &&
+                    typeof displayData === "object" &&
+                    "title" in displayData
+                      ? displayData.title ||
+                        artwork.title ||
+                        "Untitled art piece"
+                      : artwork.title || "Untitled art piece"}
+                  </motion.h3>
+                  <div className="flex justify-between items-center mb-1">
                     <motion.p
                       layoutId={`artist-${artistName}-${id}`}
-                      className="text-black text-base mb-1 break-words"
+                      className="text-black text-base break-words"
                     >
                       {displayData &&
                       typeof displayData === "object" &&
@@ -158,25 +158,24 @@ export function CardHarvard({ artwork }: CardHarvardProps) {
                         ? displayData.artistDisplayName || artistName
                         : artistName}
                     </motion.p>
-                    <p className="text-gray-700 text-sm">
-                      {displayData &&
-                      typeof displayData === "object" &&
-                      "dated" in displayData
-                        ? displayData.dated || artwork.dated || "Date Unknown"
-                        : artwork.dated || "Date Unknown"}
-                    </p>
+                    <motion.button
+                      layout
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="px-7 py-1 text-sm rounded-full font-bold bg-cyan-200 text-black hover:bg-cyan-500 transition-colors"
+                      onClick={handleSaveClick}
+                    >
+                      Save to <br /> collection
+                    </motion.button>
                   </div>
-
-                  <motion.button
-                    layout
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="px-4 py-3 text-sm rounded-full font-bold bg-cyan-200 text-black hover:bg-cyan-500 transition-colors flex-shrink-0"
-                    onClick={handleSaveClick}
-                  >
-                    Save to <br></br> collection
-                  </motion.button>
+                  <p className="text-gray-700 text-sm">
+                    {displayData &&
+                    typeof displayData === "object" &&
+                    "dated" in displayData
+                      ? displayData.dated || artwork.dated || "Date Unknown"
+                      : artwork.dated || "Date Unknown"}
+                  </p>
                 </div>
                 <div className="flex-1 overflow-y-auto px-4 pb-4 min-h-0">
                   <motion.div
@@ -320,32 +319,32 @@ export function CardHarvard({ artwork }: CardHarvardProps) {
           </div>
         </motion.div>
         <div className="p-4">
-          <div className="flex justify-between items-start gap-3">
-            <div className="flex-1 min-w-0">
-              <motion.h3
-                layoutId={`title-${artwork.title}-${id}`}
-                className="text-lg font-semibold text-gray-900 break-words leading-tight mb-1"
-                title={artwork.title}
-              >
-                {artwork.title || "Untitled art piece"}
-              </motion.h3>
-              <motion.p
-                layoutId={`artist-${artistName}-${id}`}
-                className="text-sm text-gray-700 break-words leading-tight"
-                title={artistName}
-              >
-                {artistName}
-              </motion.p>
-              <p className="text-xs text-gray-600 mt-1">
+          <div>
+            <motion.h3
+              layoutId={`title-${artwork.title}-${id}`}
+              className="text-lg font-semibold text-gray-900 break-words leading-tight mb-1"
+              title={artwork.title}
+            >
+              {artwork.title || "Untitled art piece"}
+            </motion.h3>
+            <motion.p
+              layoutId={`artist-${artistName}-${id}`}
+              className="text-sm text-gray-700 break-words leading-tight"
+              title={artistName}
+            >
+              {artistName}
+            </motion.p>
+            <div className="flex justify-between items-center mt-1">
+              <p className="text-xs text-gray-600">
                 {artwork.dated || "Date Unknown"}
               </p>
+              <button
+                className="px-5 py-1 text-xs rounded-full font-medium bg-cyan-200 text-black hover:bg-cyan-500 transition-colors"
+                onClick={handleSaveClick}
+              >
+                Save to <br /> collection
+              </button>
             </div>
-            <button
-              className="flex-shrink-0 px-3 py-1 text-xs rounded-full font-medium bg-cyan-200 text-black hover:bg-cyan-500 transition-colors"
-              onClick={handleSaveClick}
-            >
-              Save to <br></br> collection
-            </button>
           </div>
         </div>
       </motion.div>
